@@ -14,6 +14,9 @@ vel = 5
 
 run = True
 
+isJump = False
+jumpCount = 10
+
 while run:
     pygame.time.delay(100)
 
@@ -25,16 +28,20 @@ while run:
 
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_LEFT]:
-
+    if keys[pygame.K_LEFT] and x > vel :
             x -= vel
-        if keys[pygame.K_RIGHT]:
-            pass
-        if keys[pygame.K_DOWN]:
-            pass
-        if keys[pygame.K_UP]:
-            pass
-        pygame.draw.rect(win, (255,0,0), (x,y,width,height))
-        pygame.display.update()
+    if keys[pygame.K_RIGHT] and x < 500 - width - vel :
+            x += vel
+    if keys[pygame.K_DOWN] and y < 500 - height - vel:
+            y += vel
+    if keys[pygame.K_UP] and y > vel:
+            y -= vel
+
+
+
+            
+    win.fill((0,0,0))
+    pygame.draw.rect(win, (255,0,0), (x,y,width,height))
+    pygame.display.update()
 
 pygame.quit()
