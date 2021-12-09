@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 
-win = pygame.display.set_mode((500,500))
+win = pygame.display.set_mode((500,480))
 
 pygame.display.set_caption("First game")
 
@@ -28,6 +28,8 @@ char = pygame.image.load('standing.png')
 
 def redrawGameWindow():
     global walkCount
+    global left
+    global right
 
     win.blit(bg, (0,0))
 
@@ -52,6 +54,8 @@ def redrawGameWindow():
 
         walkCount = 0
 
+    pygame.draw.rect(win, (255,0,0), (100,400,80,20))
+
     pygame.display.update()
 
 
@@ -67,7 +71,7 @@ while run:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and x > vel :
+    if keys[pygame.K_LEFT] and x > vel:
             x -= vel
             left = True
             right = False
