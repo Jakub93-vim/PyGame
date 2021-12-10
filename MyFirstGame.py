@@ -25,23 +25,26 @@ class player(object):
         self.right = False
         self.walkCount = 0
         self.run = True
+        self.standing = True
 
     def draw (self,win):
 
         if self.walkCount >= 9:
             self.walkCount = 0
 
-        if self.left == True:
-            win.blit(walkLeft[self.walkCount], (self.x, self.y))
-            self.walkCount += 1
+        if not self.standing:
+            if self.left:
+                win.blit(walkLeft[self.walkCount], (self.x, self.y))
+                self.walkCount += 1
 
-        elif self.right == True:
-            win.blit(walkRight[self.walkCount], (self.x, self.y))
-            self.walkCount += 1
-
+            elif self.right:
+                win.blit(walkRight[self.walkCount], (self.x, self.y))
+                self.walkCount += 1
         else:
-            win.blit(char, (self.x, self.y))
-            self.walkCount = 0
+            if self.right:
+                win.blit(walkRight[0], (self.x, self.y))
+            else:
+                win.blit(walkLeft[0], (self.x, self.y))
 
 class projectile(object):
 
@@ -63,11 +66,14 @@ class projectile(object):
 
 
 jack = player(300,410,64,64)
+bullets = []
 
 def redrawGameWindow():
 
     win.blit(bg, (0,0))
     jack.draw(win)
+    for bullet in bullets:
+        bullet.draw(win)
     pygame.display.update()
 
 while jack.run:
@@ -77,25 +83,41 @@ while jack.run:
         if event.type == pygame.QUIT:
             jack.run = False
 
+    for bullet in bullets:
+        if bullet.x < 500 and bullet.x > 0:
+            bullet.x += bullet.vel
+        else:
+            bullets.pop(bullets.index(bullet))
+
     keys = pygame.key.get_pressed()
 
+    if keys[pygame.K_SPACE]:
+        if jack.left:
+
+            facing = -1
+        else:
+            facing = 1
+        if len(bullets) < 5:
+            bullets.append(projectile(jack.x+jack.width/2,jack.y+jack.height/2,6,(0,0,0),facing))
+
     if keys[pygame.K_LEFT] and jack.x > jack.vel:
-            jack.x -= jack.vel
-            jack.left = True
-            jack.right = False
+        jack.x -= jack.vel
+        jack.left = True
+        jack.right = False
+        jack.standing = False
 
     elif keys[pygame.K_RIGHT] and jack.x < 500 - jack.width - jack.vel :
-            jack.x += jack.vel
-            jack.right = True
-            jack.left = False
-    else:
+        jack.x += jack.vel
+        jack.right = True
         jack.left = False
-        jack.right = False
+        jack.standing = False
+    else:
+        jack.standing = True
         jack.walkCount = 0
 
     if not(jack.isJump):
 
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_UP]:
             jack.isJump = True
             jack.right = False
             jack.left = False
