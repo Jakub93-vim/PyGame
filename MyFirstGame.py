@@ -5,6 +5,7 @@ pygame.init()
 win = pygame.display.set_mode((500,480))
 
 pygame.display.set_caption("First game")
+score = 0
 
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png'), pygame.image.load('R3.png'), pygame.image.load('R4.png'), pygame.image.load('R5.png'), pygame.image.load('R6.png'), pygame.image.load('R7.png'), pygame.image.load('R8.png'), pygame.image.load('R9.png')]
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
@@ -26,6 +27,7 @@ class player(object):
         self.walkCount = 0
         self.run = True
         self.standing = True
+        self.hitbox = (self.x + 20, self.y + 20, 30 ,60)
 
     def draw (self,win):
 
@@ -45,6 +47,8 @@ class player(object):
                 win.blit(walkRight[0], (self.x, self.y))
             else:
                 win.blit(walkLeft[0], (self.x, self.y))
+        self.hitbox = (self.x + 17, self.y + 11, 30, 60)
+        pygame.draw.rect(win, (255,0,0), self.hitbox, 2)
 
 class projectile(object):
 
@@ -80,6 +84,7 @@ class enemy(object):
         self.path = [x, end]
         self.walkCount = 0
         self.vel = 3
+        self.hitbox = (self.x + 18, self.y + 1, 30, 60)
 
     def draw(self, win):
         self.move()
@@ -92,6 +97,9 @@ class enemy(object):
         else:
             win.blit(self.walkLeft[self.walkCount], (self.x,self.y))
             self.walkCount += 1
+
+        self.hitbox = (self.x + 18, self.y + 1, 30, 60)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
     def move(self):
         if self.vel > 0:
@@ -106,9 +114,13 @@ class enemy(object):
             else:
                 self.vel = +3
 
+    def hit(self):
+        print ("hit")
+
 jack = player(300,410,64,64)
 bullets = []
 goblin = enemy(60,410,64,64,200)
+
 
 def redrawGameWindow():
 
@@ -117,6 +129,10 @@ def redrawGameWindow():
     goblin.draw(win)
     for bullet in bullets:
         bullet.draw(win)
+
+    font = pygame.font.SysFont("comicsans", 30, True)
+    text = font.render('Score: ' + str(score), 1, (0,0,0,))
+    win.blit((text), (350,10))
     pygame.display.update()
 
 while jack.run:
@@ -127,6 +143,13 @@ while jack.run:
             jack.run = False
 
     for bullet in bullets:
+
+        if bullet.y - bullet.radius < goblin.hitbox[1] + goblin.hitbox[3] and bullet.y + bullet.radius > goblin.hitbox[1]:
+            if bullet.x + bullet.radius > goblin.hitbox[0] and bullet.x - bullet.radius < goblin.hitbox[0] + goblin.hitbox[2]:
+                goblin.hit()
+                score += 1
+                bullets.pop(bullets.index(bullet))
+
         if bullet.x < 500 and bullet.x > 0:
             bullet.x += bullet.vel
         else:
