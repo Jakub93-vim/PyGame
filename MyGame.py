@@ -5,7 +5,7 @@ pygame.init()
 win = pygame.display.set_mode((500,480))
 pygame.display.set_caption("MyGame")
 bg = pygame.image.load('bg.jpg')
-turnLeft = [pygame.image.load('L1.png')]
+walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png')]
 
 class player(object):
 
@@ -16,13 +16,20 @@ class player(object):
         self.width = width
         self.height = height
         self.vel = 3
+        self.walkCount = 0
+        self.jumpNum = 8
+        self.isJump = False
 
     def draw(self, win):
 
-        win.blit(turnLeft[0],(self.x, self.y))
+        if jack.walkCount > 1:
+            jack.walkCount = 0
+
+        win.blit(walkLeft[jack.walkCount],(jack.x, jack.y))
 
 
-jack = player(200,150,60,80)
+
+jack = player(200,400,60,80)
 run = True
 
 def drawOnScreen():
@@ -43,12 +50,30 @@ while run:
 
     if keys[pygame.K_UP]:
         jack.y -= jack.vel
+        jack.walkCount += 1
 
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_DOWN]:
+        jack.y += jack.vel
+        jack.walkCount += 1
+
+    if keys[pygame.K_LEFT] and jack.x > jack.vel:
         jack.x -= jack.vel
+        jack.walkCount += 1
 
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel):
         jack.x += jack.vel
+        jack.walkCount += 1
+
+    if not jack.isJump:
+        if keys[pygame.K_SPACE]:
+            jack.isJump = True
+    else:
+        jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5
+        jack.jumpNum -= 1
+        if jack.jumpNum < -8:
+            jack.isJump = False
+            jack.jumpNum = 8
+
 
     drawOnScreen()
 
