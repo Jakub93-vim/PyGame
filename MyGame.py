@@ -33,16 +33,32 @@ class player(object):
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
+class projectile (object):
+
+    def __init__(self,x,y):
+
+        self.x = x
+        self.y = y
+        self.radius = 5
+        self.velocity = 3
+        
+    def drawProjectile(self,win):
+        
+        pygame.draw.circle(win, (255,0,0), (jack.x + self.x,jack.y + self.y), self.radius)
+
+        pygame.draw.circle(win,(255,0,0), (200,400), 10)
 
 
 jack = player(200,400,60,80)
 run = True
+bullet = projectile(jack.x,jack.y)
 
 def drawOnScreen():
 
     win.blit(bg,(0,0))
     jack.draw(win)
     pygame.display.update()
+    bullet.drawProjectile(win)
     
 
 while run:
@@ -54,13 +70,13 @@ while run:
     pygame.time.delay(100)
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_UP]:
-        jack.y -= jack.vel
-        jack.walkCount += 1
+    if keys[pygame.K_SPACE]:
+        if jack.Right:
+            bullet.x += bullet.velocity
+        if jack.Left:
+            bullet.x -= bullet.velocity
 
-    if keys[pygame.K_DOWN]:
-        jack.y += jack.vel
-        jack.walkCount += 1
+    print (bullet.x, bullet.y)
 
     if keys[pygame.K_LEFT] and jack.x > jack.vel:
         jack.x -= jack.vel
@@ -75,7 +91,7 @@ while run:
         jack.Left = False
 
     if not jack.isJump:
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_UP]:
             jack.isJump = True
     else:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5
