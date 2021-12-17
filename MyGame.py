@@ -8,6 +8,7 @@ bg = pygame.image.load('bg.jpg')
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png')]
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png')]
 
+
 class player(object):
 
     def __init__(self,x,y,width,height):
@@ -42,11 +43,11 @@ class projectile (object):
         self.radius = 5
         self.velocity = 3
         
-    def drawProjectile(self,win):
+    def draw(self,win):
         
-        pygame.draw.circle(win, (255,0,0), (jack.x + self.x,jack.y + self.y), self.radius)
-
-        pygame.draw.circle(win,(255,0,0), (200,400), 10)
+        pygame.draw.circle(win, (255,0,0), (bullet.x,bullet.y), self.radius)
+        print ('kreslim', jack.x, self.x)
+        pygame.draw.circle(win,(255,0,0), (200,300), 10)
 
 
 jack = player(200,400,60,80)
@@ -57,9 +58,8 @@ def drawOnScreen():
 
     win.blit(bg,(0,0))
     jack.draw(win)
+    bullet.draw(win)
     pygame.display.update()
-    bullet.drawProjectile(win)
-    
 
 while run:
 
@@ -75,8 +75,6 @@ while run:
             bullet.x += bullet.velocity
         if jack.Left:
             bullet.x -= bullet.velocity
-
-    print (bullet.x, bullet.y)
 
     if keys[pygame.K_LEFT] and jack.x > jack.vel:
         jack.x -= jack.vel
