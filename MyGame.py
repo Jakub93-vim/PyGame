@@ -42,12 +42,11 @@ class projectile (object):
         self.y = y
         self.radius = 5
         self.velocity = 3
+        self.isShooting = False
         
     def draw(self,win):
         
-        pygame.draw.circle(win, (255,0,0), (bullet.x,bullet.y), self.radius)
-        print ('kreslim', jack.x, self.x)
-        pygame.draw.circle(win,(255,0,0), (200,300), 10)
+        pygame.draw.circle(win, (255,0,0), (bullet.x+(jack.width/2),bullet.y + (jack.height/2)), self.radius)
 
 
 jack = player(200,400,60,80)
@@ -70,7 +69,11 @@ while run:
     pygame.time.delay(100)
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_SPACE]:
+    if not bullet.isShooting:
+        if keys[pygame.K_SPACE]:
+            bullet.isShooting = True
+
+    else:
         if jack.Right:
             bullet.x += bullet.velocity
         if jack.Left:
