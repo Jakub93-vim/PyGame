@@ -94,25 +94,25 @@ while run:
             bullet.x = jack.x
             bullet.y = jack.y
 
-    if keys[pygame.K_LEFT] and jack.x > jack.vel:
+    if keys[pygame.K_LEFT] and jack.x > jack.vel: # going left
         jack.x -= jack.vel
         jack.walkCount += 1
         jack.Left = True
         jack.Right = False
 
-    if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel):
+    if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel): # going right
         jack.x += jack.vel
         jack.walkCount += 1
         jack.Right = True
         jack.Left = False
 
-    if not jack.isJump:
+    if not jack.isJump: # starts jump
         if keys[pygame.K_UP]:
-            jack.isJump = True
+            jack.isJump = True # switch to else part
     else:
-        jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5
+        jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
         jack.jumpNum -= 1
-        if jack.jumpNum < -8:
+        if jack.jumpNum < -8: # stops the jump
             jack.isJump = False
             jack.jumpNum = 8
 
