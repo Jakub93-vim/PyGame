@@ -41,8 +41,9 @@ class projectile (object):
         self.x = x
         self.y = y
         self.radius = 5
-        self.velocity = 3
+        self.velocity = 6
         self.isShooting = False
+        self.facing = 1
         
     def draw(self,win):
         
@@ -57,7 +58,8 @@ def drawOnScreen():
 
     win.blit(bg,(0,0))
     jack.draw(win)
-    bullet.draw(win)
+    if bullet.isShooting:
+        bullet.draw(win)
     pygame.display.update()
 
 while run:
@@ -71,13 +73,23 @@ while run:
 
     if not bullet.isShooting:
         if keys[pygame.K_SPACE]:
+            if jack.Right:
+                bullet.facing = 1
+            else:
+                bullet.facing = -1
             bullet.isShooting = True
 
     else:
-        if jack.Right:
+        if bullet.facing == 1:
             bullet.x += bullet.velocity
-        if jack.Left:
+            print(bullet.x)
+        if bullet.facing == -1:
             bullet.x -= bullet.velocity
+            print (bullet.x)
+        if bullet.x < jack.vel or bullet.x > (480 - jack.vel):
+            bullet.isShooting = False
+            bullet.x = jack.x
+            bullet.y = jack.y
 
     if keys[pygame.K_LEFT] and jack.x > jack.vel:
         jack.x -= jack.vel
