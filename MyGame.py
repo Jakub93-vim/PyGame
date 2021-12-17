@@ -4,7 +4,9 @@ pygame.init()
 
 win = pygame.display.set_mode((500,480))
 pygame.display.set_caption("MyGame")
+#background
 bg = pygame.image.load('bg.jpg')
+#pictures of the player
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png')]
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png')]
 
@@ -28,7 +30,7 @@ class player(object):
 
         if jack.walkCount > 1:
             jack.walkCount = 0
-
+        #draws player according to its orientation
         if jack.Left:
             win.blit(walkLeft[jack.walkCount],(jack.x, jack.y))
         else:
@@ -46,7 +48,7 @@ class projectile (object):
         self.facing = 1
         
     def draw(self,win):
-        
+        #draws the bullet
         pygame.draw.circle(win, (255,0,0), (bullet.x+(jack.width/2),bullet.y + (jack.height/2)), self.radius)
 
 
@@ -58,6 +60,7 @@ def drawOnScreen():
 
     win.blit(bg,(0,0))
     jack.draw(win)
+    #displays the bullet when K_SPACE is pressed
     if bullet.isShooting:
         bullet.draw(win)
     pygame.display.update()
@@ -71,22 +74,22 @@ while run:
     pygame.time.delay(100)
     keys = pygame.key.get_pressed()
 
-    if not bullet.isShooting:
+    if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
-            if jack.Right:
+            if jack.Right: # setting the orientation of the bullet direction
                 bullet.facing = 1
             else:
                 bullet.facing = -1
-            bullet.isShooting = True
+            bullet.isShooting = True # goes to the else part in next while round
 
     else:
-        if bullet.facing == 1:
+        if bullet.facing == 1: #according to orientation sends a bullet
             bullet.x += bullet.velocity
             print(bullet.x)
         if bullet.facing == -1:
             bullet.x -= bullet.velocity
             print (bullet.x)
-        if bullet.x < jack.vel or bullet.x > (480 - jack.vel):
+        if bullet.x < jack.vel or bullet.x > (460 - jack.vel): #when bullet of the screen, removes it
             bullet.isShooting = False
             bullet.x = jack.x
             bullet.y = jack.y
