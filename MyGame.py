@@ -9,6 +9,8 @@ bg = pygame.image.load('bg.jpg')
 #pictures of the player
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png')]
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png')]
+enemyLeft = [pygame.image.load('L1E.png'), pygame.image.load('L2E.png')]
+enemyRight = [pygame.image.load('R1E.png'), pygame.image.load('R2E.png')]
 
 
 class player(object):
@@ -51,7 +53,31 @@ class projectile (object):
         #draws the bullet
         pygame.draw.circle(win, (255,0,0), (bullet.x+(jack.width/2),bullet.y + (jack.height/2)), self.radius)
 
+class enemy(object):
 
+    def __init__(self,x,y,width,height):
+
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.walkDirection = -1
+        self.vel = 5
+        self.walkCount = 0
+        self.hitbox = (self.x+20, self.y+7, 27, 52)
+
+
+    def draw(self,win):
+        if hoblit.walkDirection == -1:
+            win.blit(enemyLeft[hoblit.walkCount],(hoblit.x,hoblit.y))
+        else:
+            win.blit(enemyRight[hoblit.walkCount], (hoblit.x,hoblit.y))
+
+        self.hitbox = (self.x+20, self.y+7, 27, 52)
+        pygame.draw.rect(win,(200,50,80), hoblit.hitbox)
+
+
+hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
 run = True
 bullet = projectile(jack.x,jack.y)
@@ -63,6 +89,7 @@ def drawOnScreen():
     #displays the bullet when K_SPACE is pressed
     if bullet.isShooting:
         bullet.draw(win)
+    hoblit.draw(win)
     pygame.display.update()
 
 while run:
@@ -93,6 +120,26 @@ while run:
             bullet.isShooting = False
             bullet.x = jack.x
             bullet.y = jack.y
+
+    #enemy animation
+    if hoblit.walkCount < 1:
+        hoblit.walkCount += 1
+
+    else:
+        hoblit.walkCount = 0
+
+    #enemy walking
+    if hoblit.walkDirection == -1:
+        if hoblit.x > hoblit.vel:
+            hoblit.x -= hoblit.vel
+        else:
+            hoblit.walkDirection = 1
+
+    if hoblit.walkDirection == 1:
+        if hoblit.x < 460 - hoblit.vel:
+            hoblit.x += hoblit.vel
+        else:
+            hoblit.walkDirection = -1
 
     if keys[pygame.K_LEFT] and jack.x > jack.vel: # going left
         jack.x -= jack.vel
