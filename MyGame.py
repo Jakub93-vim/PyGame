@@ -27,6 +27,7 @@ class player(object):
         self.isJump = False
         self.Left = False
         self.Right = False
+        self.hitbox = (self.x + 20, self.y + 7, 27, 52)
 
     def draw(self, win):
 
@@ -37,6 +38,9 @@ class player(object):
             win.blit(walkLeft[jack.walkCount],(jack.x, jack.y))
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
+
+        self.hitbox = (self.x + 20, self.y + 7, 27, 52)
+        pygame.draw.rect(win, (200, 50, 80), jack.hitbox)
 
 class projectile (object):
 
@@ -100,6 +104,9 @@ while run:
 
     pygame.time.delay(100)
     keys = pygame.key.get_pressed()
+
+    #evaluation of hiting the enemy
+
 
     if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
