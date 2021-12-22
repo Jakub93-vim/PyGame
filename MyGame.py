@@ -80,6 +80,9 @@ class enemy(object):
         self.hitbox = (self.x+20, self.y+7, 27, 52)
         pygame.draw.rect(win,(200,50,80), hoblit.hitbox)
 
+    def hit(self):
+        print('hit')
+
 
 hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
@@ -106,7 +109,8 @@ while run:
     keys = pygame.key.get_pressed()
 
     #evaluation of hiting the enemy
-
+    if bullet.x > hoblit.hitbox[0] and bullet.x < (hoblit.hitbox[0] - hoblit.hitbox[2]) :
+        hoblit.hit()
 
     if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
@@ -119,10 +123,8 @@ while run:
     else:
         if bullet.facing == 1: #according to orientation sends a bullet
             bullet.x += bullet.velocity
-            print(bullet.x)
         if bullet.facing == -1:
             bullet.x -= bullet.velocity
-            print (bullet.x)
         if bullet.x < jack.vel or bullet.x > (460 - jack.vel): #when bullet of the screen, removes it
             bullet.isShooting = False
             bullet.x = jack.x
