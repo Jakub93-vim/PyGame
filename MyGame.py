@@ -40,7 +40,7 @@ class player(object):
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
-        pygame.draw.rect(win, (200, 50, 80), jack.hitbox)
+        #pygame.draw.rect(win, (200, 50, 80), jack.hitbox) # rectangle of the player
 
 class projectile (object):
 
@@ -78,7 +78,7 @@ class enemy(object):
             win.blit(enemyRight[hoblit.walkCount], (hoblit.x,hoblit.y))
 
         self.hitbox = (self.x+20, self.y+7, 27, 52)
-        pygame.draw.rect(win,(200,50,80), hoblit.hitbox)
+        #pygame.draw.rect(win,(200,50,80), hoblit.hitbox) # rectangle of the enemy
 
     def hit(self):
         print('hit')
@@ -109,6 +109,8 @@ while run:
     keys = pygame.key.get_pressed()
 
     #evaluation of hiting the enemy
+
+    print(hoblit.hitbox[0],bullet.x,hoblit.hitbox[2])
     if bullet.x > hoblit.hitbox[0] and bullet.x < (hoblit.hitbox[0] - hoblit.hitbox[2]) :
         hoblit.hit()
 
