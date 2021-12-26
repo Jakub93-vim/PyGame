@@ -110,8 +110,8 @@ while run:
 
     #evaluation of hiting the enemy
 
-    print(hoblit.hitbox[0],bullet.x,hoblit.hitbox[2])
-    if bullet.x > hoblit.hitbox[0] and bullet.x < (hoblit.hitbox[0] - hoblit.hitbox[2]) :
+    print(hoblit.hitbox[0],bullet.x,(hoblit.hitbox[0] - hoblit.hitbox[2]))
+    if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]) :
         hoblit.hit()
 
     if not bullet.isShooting: #default value of isShooting is False
