@@ -52,10 +52,12 @@ class projectile (object):
         self.velocity = 6
         self.isShooting = False
         self.facing = 1
+        self.isHit = False
         
     def draw(self,win):
         #draws the bullet
-        pygame.draw.circle(win, (255,0,0), (bullet.x+(jack.width/2),bullet.y + (jack.height/2)), self.radius)
+        if not bullet.isHit:
+            pygame.draw.circle(win, (255,0,0), (bullet.x+(jack.width/2),bullet.y + (jack.height/2)), self.radius)
 
 class enemy(object):
 
@@ -111,7 +113,8 @@ while run:
     #evaluation of hiting the enemy
 
     print(hoblit.hitbox[0],bullet.x,(hoblit.hitbox[0] - hoblit.hitbox[2]))
-    if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]) :
+    if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]):
+        bullet.isHit = True
         hoblit.hit()
 
     if not bullet.isShooting: #default value of isShooting is False
@@ -129,6 +132,7 @@ while run:
             bullet.x -= bullet.velocity
         if bullet.x < jack.vel or bullet.x > (460 - jack.vel): #when bullet of the screen, removes it
             bullet.isShooting = False
+            bullet.isHit = False #when bullet of the screen, isHit is False
             bullet.x = jack.x
             bullet.y = jack.y
 
