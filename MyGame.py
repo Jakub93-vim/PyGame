@@ -71,6 +71,7 @@ class enemy(object):
         self.vel = 5
         self.walkCount = 0
         self.hitbox = (self.x+20, self.y+7, 27, 52)
+        self.Injury = 0
 
 
     def draw(self,win):
@@ -81,9 +82,14 @@ class enemy(object):
 
         self.hitbox = (self.x+20, self.y+7, 27, 52)
         #pygame.draw.rect(win,(200,50,80), hoblit.hitbox) # rectangle of the enemy
+        
+        pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40, 10), 3, 3)
+
+        pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40 + hoblit.Injury, 10), 0, 3)
 
     def hit(self):
         print('hit')
+        hoblit.Injury -= 5
 
 
 hoblit = enemy(150,400,60,80)
@@ -124,7 +130,6 @@ while run:
             else:
                 bullet.facing = -1
             bullet.isShooting = True # goes to the else part in next while round
-
     else:
         if bullet.facing == 1: #according to orientation sends a bullet
             bullet.x += bullet.velocity
