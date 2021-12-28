@@ -118,10 +118,12 @@ while run:
 
     #evaluation of hiting the enemy
 
-    print(hoblit.hitbox[0],bullet.x,(hoblit.hitbox[0] - hoblit.hitbox[2]))
-    if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]):
-        bullet.isHit = True
-        hoblit.hit()
+    #print(hoblit.hitbox[0],bullet.x,(hoblit.hitbox[0] - hoblit.hitbox[2]))
+
+    def enemyGetsShot(): # when enemy is hit, lowers its life and bullet disappears
+        if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]):
+            bullet.isHit = True
+            hoblit.hit()
 
     if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
@@ -131,6 +133,7 @@ while run:
                 bullet.facing = -1
             bullet.isShooting = True # goes to the else part in next while round
     else:
+        enemyGetsShot()
         if bullet.facing == 1: #according to orientation sends a bullet
             bullet.x += bullet.velocity
         if bullet.facing == -1:
