@@ -104,7 +104,8 @@ def drawOnScreen():
     #displays the bullet when K_SPACE is pressed
     if bullet.isShooting:
         bullet.draw(win)
-    hoblit.draw(win)
+    if hoblit.Injury > -40:
+        hoblit.draw(win)
     pygame.display.update()
 
 while run:
@@ -115,10 +116,6 @@ while run:
 
     pygame.time.delay(100)
     keys = pygame.key.get_pressed()
-
-    #evaluation of hiting the enemy
-
-    #print(hoblit.hitbox[0],bullet.x,(hoblit.hitbox[0] - hoblit.hitbox[2]))
 
     def enemyGetsShot(): # when enemy is hit, lowers its life and bullet disappears
         if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]):
