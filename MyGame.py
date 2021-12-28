@@ -91,11 +91,13 @@ class enemy(object):
         print('hit')
         hoblit.Injury -= 5
 
+#creates the objects of the game
 
 hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
 run = True
 bullet = projectile(jack.x,jack.y)
+myFont = pygame.font.SysFont('Comis Sans MS', 30)
 
 def drawOnScreen():
 
@@ -106,6 +108,9 @@ def drawOnScreen():
         bullet.draw(win)
     if hoblit.Injury > -40:
         hoblit.draw(win)
+    Score = myFont.render('Your score is:' + str(abs(hoblit.Injury)), 1, (0,0,0) )
+    win.blit(Score, (330,25))
+
     pygame.display.update()
 
 while run:
