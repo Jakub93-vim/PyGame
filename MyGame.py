@@ -72,7 +72,7 @@ class enemy(object):
         self.walkCount = 0
         self.hitbox = (self.x+20, self.y+7, 27, 52)
         self.Injury = 0
-
+        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
 
     def draw(self,win):
         if hoblit.walkDirection == -1:
@@ -82,7 +82,7 @@ class enemy(object):
 
         self.hitbox = (self.x+20, self.y+7, 27, 52)
         #pygame.draw.rect(win,(200,50,80), hoblit.hitbox) # rectangle of the enemy
-        
+
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40, 10), 3, 3)
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40 + hoblit.Injury, 10), 0, 3)
 
@@ -92,18 +92,22 @@ class enemy(object):
 
 class obstacle(object):
 
-    def __init__(self, x, y, width, height)
+    def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
+        self.rect = pygame.Rect(self.x, self.y, self.height, self.width)
 
-    def
+    def draw(self,win):
+
+        pygame.draw.rect(win,(0,255,0),self.rect)
 
 #creates the objects of the game
 
 hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
+level_1 = obstacle(150,340,80,20)
 run = True
 bullet = projectile(jack.x,jack.y)
 myFont = pygame.font.SysFont('Comis Sans MS', 30)
@@ -119,6 +123,7 @@ def drawOnScreen():
         hoblit.draw(win)
     Score = myFont.render('Your score is:' + str(abs(hoblit.Injury)), 1, (0,0,0) )
     win.blit(Score, (330,25))
+    level_1.draw(win)
 
     pygame.display.update()
 
