@@ -40,9 +40,9 @@ class player(object):
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
-        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
+        self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 50)
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
-        #pygame.draw.rect(win, (200, 50, 80), jack.hitbox) # rectangle of the player
+        #pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
 
 class projectile (object):
 
@@ -106,13 +106,13 @@ class obstacle(object):
 
     def draw(self,win):
 
-        pygame.draw.rect(win,(0,255,0),self.rect)
+        pygame.draw.rect(win,(0,0,0),self.rect,0,3)
 
 #creates the objects of the game
 
 hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
-level_1 = obstacle(250,390,20,80)
+level_1 = obstacle(250,385,20,80)
 run = True
 bullet = projectile(jack.x,jack.y)
 myFont = pygame.font.SysFont('Comis Sans MS', 30)
@@ -209,7 +209,9 @@ while run:
     else:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
         jack.jumpNum -= 1
-        if jack.jumpNum < -8: # stops the jump
+        if pygame.Rect.colliderect(level_1.rect, jack.rect):
+            jack.isJump = False
+        elif jack.jumpNum < -8: # stops the jump
             jack.isJump = False
             jack.jumpNum = 8
 
