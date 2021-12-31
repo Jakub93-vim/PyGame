@@ -112,7 +112,7 @@ class obstacle(object):
 
 hoblit = enemy(150,400,60,80)
 jack = player(200,400,60,80)
-level_1 = obstacle(150,340,80,20)
+level_1 = obstacle(250,390,20,80)
 run = True
 bullet = projectile(jack.x,jack.y)
 myFont = pygame.font.SysFont('Comis Sans MS', 30)
@@ -190,12 +190,12 @@ while run:
             hoblit.x += hoblit.vel
         else:
             hoblit.walkDirection = -1
-
-    if keys[pygame.K_LEFT] and jack.x > jack.vel: # going left
-        jack.x -= jack.vel
-        jack.walkCount += 1
-        jack.Left = True
-        jack.Right = False
+    if not pygame.Rect.colliderect(level_1.rect, jack.rect):
+        if keys[pygame.K_LEFT] and jack.x > jack.vel: # going left
+            jack.x -= jack.vel
+            jack.walkCount += 1
+            jack.Left = True
+            jack.Right = False
 
     if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel): # going right
         jack.x += jack.vel
