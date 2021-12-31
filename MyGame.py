@@ -28,6 +28,7 @@ class player(object):
         self.Left = False
         self.Right = False
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
+        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
 
     def draw(self, win):
 
@@ -39,6 +40,7 @@ class player(object):
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
+        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
         #pygame.draw.rect(win, (200, 50, 80), jack.hitbox) # rectangle of the player
 
@@ -80,10 +82,12 @@ class enemy(object):
             win.blit(enemyLeft[hoblit.walkCount],(hoblit.x,hoblit.y))
         else:
             win.blit(enemyRight[hoblit.walkCount], (hoblit.x,hoblit.y))
-        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
-        self.hitbox = (self.x+20, self.y+7, 27, 52)
-        pygame.draw.rect(win,(200,50,80), hoblit.rect) # rectangle of the enemy
 
+        #updates coordinates in enemy's hitbox
+        self.hitbox = (self.x+20, self.y+7, 27, 52)
+        #pygame.draw.rect(win,(20,0,80), hoblit.hitbox) # rectangle of the enemy
+
+        #remaining health of the enemy
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40, 10), 3, 3)
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40 + hoblit.Injury, 10), 0, 3)
 
@@ -142,7 +146,7 @@ while run:
             bullet.isHit = True
             hoblit.hit()
 
-    if pygame.Rect.colliderect(level_1.rect, hoblit.rect):
+    if pygame.Rect.colliderect(level_1.rect, jack.rect):
         print('kolize' + str(hoblit.walkCount))
 
     if not bullet.isShooting: #default value of isShooting is False
