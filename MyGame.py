@@ -146,6 +146,9 @@ while run:
             bullet.isHit = True
             hoblit.hit()
 
+    #detection of collision
+    #TODO restrict movement when collision detected
+
     if pygame.Rect.colliderect(level_1.rect, jack.rect):
         print('kolize' + str(hoblit.walkCount))
 
