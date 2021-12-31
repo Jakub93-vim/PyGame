@@ -84,12 +84,21 @@ class enemy(object):
         #pygame.draw.rect(win,(200,50,80), hoblit.hitbox) # rectangle of the enemy
         
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40, 10), 3, 3)
-
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40 + hoblit.Injury, 10), 0, 3)
 
     def hit(self):
         print('hit')
         hoblit.Injury -= 5
+
+class obstacle(object):
+
+    def __init__(self, x, y, width, height)
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def
 
 #creates the objects of the game
 
