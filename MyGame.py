@@ -74,14 +74,15 @@ class enemy(object):
         self.Injury = 0
         self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
 
+
     def draw(self,win):
         if hoblit.walkDirection == -1:
             win.blit(enemyLeft[hoblit.walkCount],(hoblit.x,hoblit.y))
         else:
             win.blit(enemyRight[hoblit.walkCount], (hoblit.x,hoblit.y))
-
+        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
         self.hitbox = (self.x+20, self.y+7, 27, 52)
-        #pygame.draw.rect(win,(200,50,80), hoblit.hitbox) # rectangle of the enemy
+        pygame.draw.rect(win,(200,50,80), hoblit.rect) # rectangle of the enemy
 
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40, 10), 3, 3)
         pygame.draw.rect(win, (180, 0, 0), (self.x + 20, self.y - 15, 40 + hoblit.Injury, 10), 0, 3)
@@ -140,6 +141,9 @@ while run:
         if bullet.x < hoblit.hitbox[0] and bullet.x > (hoblit.hitbox[0] - hoblit.hitbox[2]):
             bullet.isHit = True
             hoblit.hit()
+
+    if pygame.Rect.colliderect(level_1.rect, hoblit.rect):
+        print('kolize' + str(hoblit.walkCount))
 
     if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
