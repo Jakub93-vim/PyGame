@@ -213,9 +213,12 @@ while run:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
         jack.jumpNum -= 1
         print (jack.rect[1], jack.rect[1]-jack.jumpNum)
-        jack.rect.move_ip(0, jack.jumpNum)
-        
-        if pygame.Rect.colliderect(level_1.rect, jack.rect):
+        new_rect = pygame.Rect(jack.rect)
+        new_rect.move_ip(0,jack.jumpNum)
+        last_jack_y = jack.y
+        if pygame.Rect.colliderect(level_1.rect, new_rect):
+            print ('kolize rect, pozice jackrect:', jack.rect[1])
+            jack.y = last_jack_y
             jack.isJump = False
         if jack.jumpNum < -8: # stops the jump
             jack.isJump = False
