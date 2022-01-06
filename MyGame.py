@@ -28,8 +28,7 @@ class player(object):
         self.Left = False
         self.Right = False
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
-        self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
-        self.rect2=pygame.Rect(200,50,20,50)
+        self.rect = pygame.Rect(self.x + 20, self.y - 15, 27, 60)
 
     def draw(self, win):
 
@@ -41,10 +40,9 @@ class player(object):
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
-        self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 50)
+        self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 60)
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
         pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
-        pygame.draw.rect(win, (0,100,0), self.rect2)
 
 class projectile (object):
 
@@ -214,10 +212,11 @@ while run:
         jackkoef = jack.jumpNum * abs(jack.jumpNum) * 0.5
 
         new_rect = pygame.Rect(jack.rect)
-        jumpCoef = jack.jumpNum*jack.jumpNum*0.5
-        new_rect.move_ip(0,jumpCoef)
+        jumpCoef = jack.jumpNum*abs(jack.jumpNum)*0.5
+        new_rect.move_ip(0,-jumpCoef)
         jack.jumpNum -= 1
-        print ('...........jack rect',jack.rect[1],'new rect',new_rect[1], '.....', jumpCoef, 'jack koef', jackkoef)
+        print ('...........jack rect',jack.rect[1]+jack.rect[3],'new rect',new_rect[1]+jack.rect[3], '.....', jumpCoef, 'jack koef', jackkoef, '.....horni y obstacle',
+               level_1.rect[1])
         if pygame.Rect.colliderect(level_1.rect, new_rect):
             print ('kolize rect, pozice jackrect:', jack.rect[1]+jack.rect[3])
             jack.isJump = False
