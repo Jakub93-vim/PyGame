@@ -40,9 +40,9 @@ class player(object):
         else:
              win.blit(walkRight[jack.walkCount],(jack.x, jack.y))
 
-        self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 60)
+        self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 50)
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
-        pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
+        #pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
 
 class projectile (object):
 
@@ -184,42 +184,38 @@ while run:
             hoblit.x += hoblit.vel
         else:
             hoblit.walkDirection = -1
+
     if not pygame.Rect.colliderect(level_1.rect, jack.rect):
         if keys[pygame.K_LEFT] and jack.x > jack.vel: # going left
             jack.x -= jack.vel
             jack.walkCount += 1
             jack.Left = True
             jack.Right = False
-
-    if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel): # going right
-        jack.x += jack.vel
-        jack.walkCount += 1
-        jack.Right = True
-        jack.Left = False
-        
-    if keys[pygame.K_DOWN]:
-        jack.rect2.move_ip(0,10)
-        jack.y -= jack.vel
+    if not pygame.Rect.colliderect(level_1.rect, jack.rect):
+        if keys[pygame.K_RIGHT] and jack.x < (450 - jack.vel): # going right
+            jack.x += jack.vel
+            jack.walkCount += 1
+            jack.Right = True
+            jack.Left = False
 
     #print ('jack horni a dolni rect', jack.rect[1],jack.rect[1]+jack.rect[3])
     #print ('obstacle horni a dolni rect', level_1.rect[1], level_1.rect[1]+level_1.rect[3])
+
+    # jumps on obstacle
+    new_rect = pygame.Rect(jack.rect) # rectangle one step ahead checking if collision will occur
+    jumpCoef = jack.jumpNum * abs(jack.jumpNum) * 0.5 # rectangle move coef
+    new_rect.move_ip(0, -jumpCoef) # moving the rectangle for check
+    if pygame.Rect.colliderect(level_1.rect, new_rect): # checking the collision
+        jack.isJump = False
+    elif jack.jumpNum < 8: #if not collision, fall down
+        jack.isJump = True
 
     if not jack.isJump: # starts jump
         if keys[pygame.K_UP]:
             jack.isJump = True # switch to else part
     else:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
-        jackkoef = jack.jumpNum * abs(jack.jumpNum) * 0.5
-
-        new_rect = pygame.Rect(jack.rect)
-        jumpCoef = jack.jumpNum*abs(jack.jumpNum)*0.5
-        new_rect.move_ip(0,-jumpCoef)
         jack.jumpNum -= 1
-        print ('...........jack rect',jack.rect[1]+jack.rect[3],'new rect',new_rect[1]+jack.rect[3], '.....', jumpCoef, 'jack koef', jackkoef, '.....horni y obstacle',
-               level_1.rect[1])
-        if pygame.Rect.colliderect(level_1.rect, new_rect):
-            print ('kolize rect, pozice jackrect:', jack.rect[1]+jack.rect[3])
-            jack.isJump = False
         if jack.jumpNum < -8: # stops the jump
             jack.isJump = False
             jack.jumpNum = 8
