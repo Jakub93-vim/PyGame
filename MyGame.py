@@ -29,6 +29,7 @@ class player(object):
         self.Right = False
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
         self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
+        self.rect2=pygame.Rect(200,200,20,20)
 
     def draw(self, win):
 
@@ -42,7 +43,8 @@ class player(object):
 
         self.rect = pygame.Rect(self.x + 20, self.y + 7, 27, 50)
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
-        #pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
+        pygame.draw.rect(win, (200, 50, 80), self.rect) # rectangle of the player
+        pygame.draw.rect(win, (0,100,0), self.rect2)
 
 class projectile (object):
 
@@ -146,9 +148,6 @@ while run:
             bullet.isHit = True
             hoblit.hit()
 
-    #detection of collision
-    #TODO restrict movement when collision detected
-
     if pygame.Rect.colliderect(level_1.rect, jack.rect):
         print('kolize' + str(hoblit.walkCount))
 
@@ -202,6 +201,10 @@ while run:
         jack.walkCount += 1
         jack.Right = True
         jack.Left = False
+        
+    if keys[pygame.K_DOWN]:
+        jack.rect2.move_ip(0,10)
+        jack.y -= jack.vel
 
     if not jack.isJump: # starts jump
         if keys[pygame.K_UP]:
@@ -209,9 +212,12 @@ while run:
     else:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
         jack.jumpNum -= 1
+        print (jack.rect[1], jack.rect[1]-jack.jumpNum)
+        jack.rect.move_ip(0, jack.jumpNum)
+        
         if pygame.Rect.colliderect(level_1.rect, jack.rect):
             jack.isJump = False
-        elif jack.jumpNum < -8: # stops the jump
+        if jack.jumpNum < -8: # stops the jump
             jack.isJump = False
             jack.jumpNum = 8
 
