@@ -29,7 +29,7 @@ class player(object):
         self.Right = False
         self.hitbox = (self.x + 20, self.y + 7, 27, 52)
         self.rect = pygame.Rect(self.x + 20, self.y - 15, 40, 10)
-        self.rect2=pygame.Rect(200,200,20,20)
+        self.rect2=pygame.Rect(200,50,20,50)
 
     def draw(self, win):
 
@@ -148,9 +148,6 @@ while run:
             bullet.isHit = True
             hoblit.hit()
 
-    if pygame.Rect.colliderect(level_1.rect, jack.rect):
-        print('kolize' + str(hoblit.walkCount))
-
     if not bullet.isShooting: #default value of isShooting is False
         if keys[pygame.K_SPACE]:
             if jack.Right: # setting the orientation of the bullet direction
@@ -206,19 +203,23 @@ while run:
         jack.rect2.move_ip(0,10)
         jack.y -= jack.vel
 
+    #print ('jack horni a dolni rect', jack.rect[1],jack.rect[1]+jack.rect[3])
+    #print ('obstacle horni a dolni rect', level_1.rect[1], level_1.rect[1]+level_1.rect[3])
+
     if not jack.isJump: # starts jump
         if keys[pygame.K_UP]:
             jack.isJump = True # switch to else part
     else:
         jack.y -= jack.jumpNum * abs(jack.jumpNum) * 0.5 # going up and down
-        jack.jumpNum -= 1
-        print (jack.rect[1], jack.rect[1]-jack.jumpNum)
+        jackkoef = jack.jumpNum * abs(jack.jumpNum) * 0.5
+
         new_rect = pygame.Rect(jack.rect)
-        new_rect.move_ip(0,jack.jumpNum)
-        last_jack_y = jack.y
+        jumpCoef = jack.jumpNum*jack.jumpNum*0.5
+        new_rect.move_ip(0,jumpCoef)
+        jack.jumpNum -= 1
+        print ('...........jack rect',jack.rect[1],'new rect',new_rect[1], '.....', jumpCoef, 'jack koef', jackkoef)
         if pygame.Rect.colliderect(level_1.rect, new_rect):
-            print ('kolize rect, pozice jackrect:', jack.rect[1])
-            jack.y = last_jack_y
+            print ('kolize rect, pozice jackrect:', jack.rect[1]+jack.rect[3])
             jack.isJump = False
         if jack.jumpNum < -8: # stops the jump
             jack.isJump = False
