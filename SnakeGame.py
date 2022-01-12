@@ -130,7 +130,7 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-        pygame.time.delay(50)
+        pygame.time.delay(150)
         #clock.tick(10)
 
         s.move()
