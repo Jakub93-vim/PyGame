@@ -20,6 +20,9 @@ class cube(object):
         self.dirny = 0
         self.color = color
 
+    def __str__(self):
+        return str(self.pos)
+
     def move(self, dirnx, dirny):
         self.dirnx = dirnx
         self.dirny = dirny
@@ -43,6 +46,7 @@ class snake(object):
         self.body.append(self.head)
         self.dirnx = 0
         self.dirny = 1
+
 
     def move(self):
 
@@ -71,8 +75,10 @@ class snake(object):
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
         for i, c in enumerate(self.body):
+            print(self.head)
             p = c.pos[:]
             if p in self.turns:
+                print (self.turns)
                 turn = self.turns[p]
                 c.move(turn[0],turn[1])
                 if i == len(self.body)-1:
