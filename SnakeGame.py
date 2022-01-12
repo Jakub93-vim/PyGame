@@ -14,6 +14,9 @@ class cube(object):
 
     def __init__(self, start, dirnx=1, dirny=0,color=(255,0,0)):
         self.start = start
+        self.dirnx = 1
+        self.dirny = 0
+        self.color = color
 
     def move(self, dirnx, dirny):
         pass
@@ -33,9 +36,32 @@ class snake(object):
         self.dirnx = 0
         self.dirny = 1
 
-
     def move(self):
-        pass
+
+        keys = pygame.key.get_pressed()
+
+        for key in keys:
+
+            if keys[pygame.K_LEFT]:
+                self.dirnx = -1
+                self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx,self.dirny]
+
+            elif keys[pygame.K_RIGHT]:
+                self.dirnx = +1
+                self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+            elif keys[pygame.K_UP]:
+                self.dirnx = 0
+                self.dirny = -1
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+            elif keys[pygame.K_DOWN]:
+                self.dirnx = 0
+                self.dirny = 1
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
 
     def draw(self):
         pass
