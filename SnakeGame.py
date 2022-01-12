@@ -100,7 +100,6 @@ class snake(object):
 
 
 def redrawWindow(surface):
-    global s
     surface.fill((0,0,0))
     drawGrid(surface)
     s.draw(surface)
@@ -122,8 +121,6 @@ def main():
     flag = True
 
 
-    #clock = pygame.time.Clock()
-
     while flag:
 
         for event in pygame.event.get():
@@ -131,8 +128,6 @@ def main():
                 pygame.quit()
 
         pygame.time.delay(150)
-        #clock.tick(10)
-
         s.move()
         
         redrawWindow(win)
