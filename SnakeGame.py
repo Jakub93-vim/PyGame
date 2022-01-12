@@ -11,18 +11,26 @@ rows = 20
 win = pygame.display.set_mode((width, height))
 
 class cube(object):
+    rows = 20
+    w = 500
 
     def __init__(self, start, dirnx=1, dirny=0,color=(255,0,0)):
-        self.start = start
+        self.pos = start
         self.dirnx = 1
         self.dirny = 0
         self.color = color
 
     def move(self, dirnx, dirny):
-        pass
+        self.dirnx = dirnx
+        self.dirny = dirny
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
 
     def draw(self, surface, eyes=False):
-        pass
+        dis = self.w // self.rows
+        i = self.pos[0]
+        j = self.pos[1]
+
+        pygame.draw.rect(surface, self.color, (i * dis + 1, j * dis + 1, dis - 2, dis - 2))
 
 class snake(object):
 
@@ -62,14 +70,40 @@ class snake(object):
                 self.dirny = 1
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
+        for i, c in enumerate(self.body):
+            p = c.pos[:]
+            if p in self.turns:
+                turn = self.turns[p]
+                c.move(turn[0],turn[1])
+                if i == len(self.body)-1:
+                    self.turns.pop(p)
+            else:
+                if c.dirnx == -1 and c.pos[0] <= 0:
+                    c.pos = (c.rows - 1, c.pos[1])
+                elif c.dirnx == 1 and c.pos[0] >= c.rows - 1:
+                    c.pos = (0, c.pos[1])
+                elif c.dirny == 1 and c.pos[1] >= c.rows - 1:
+                    c.pos = (c.pos[0], 0)
+                elif c.dirny == -1 and c.pos[1] <= 0:
+                    c.pos = (c.pos[0], c.rows - 1)
+                else:
+                    c.move(c.dirnx, c.dirny)
 
-    def draw(self):
-        pass
+
+    def draw(self, surface):
+        for i,c in enumerate(self.body):
+            if i == 0:
+                c.draw(surface, True)
+
+            else:
+                c.draw(surface)
 
 
 def redrawWindow(surface):
+    global s
     surface.fill((0,0,0))
     drawGrid(surface)
+    s.draw(surface)
     pygame.display.update()
 
 def drawGrid(surface):
@@ -81,9 +115,12 @@ def drawGrid(surface):
         pygame.draw.line(surface, (255, 255, 255), (0, spaceBtwn * line), (500, spaceBtwn * line))
 
 
+s = snake((255,0,0), (10,10))
+
 def main():
 
     flag = True
+
 
     #clock = pygame.time.Clock()
 
@@ -95,6 +132,8 @@ def main():
 
         pygame.time.delay(50)
         #clock.tick(10)
+
+        s.move()
         
         redrawWindow(win)
 
