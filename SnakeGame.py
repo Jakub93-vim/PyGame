@@ -11,9 +11,11 @@ rows = 20
 win = pygame.display.set_mode((width, height))
 
 class cube(object):
-    def __init__(self, start, dirnx=1, dirny=0,color=(255,0,0)):
+    def __init__(self, dirnx=1, dirny=0,color=(255,0,0)):
 
-        pass
+        self.color = color
+        self.dirnx = dirnx
+        self.dirny = dirny
 
     def move(self, dirnx, dirny):
 
@@ -21,11 +23,15 @@ class cube(object):
 
     def draw(self, surface, eyes=False):
 
-        pass
+        pygame.draw.rect(surface, self.color, ((),()))
 
 class snake(object):
 
+    def __init__(self, color, pos):
 
+        self.color = color
+        self.pos = pos
+        
 
     def move(self):
 
@@ -37,8 +43,6 @@ class snake(object):
                 pass
         pass
 
-
-
     def draw(self, surface):
 
         pass
@@ -46,7 +50,8 @@ class snake(object):
 
 def redrawWindow(surface):
 
-    pass
+    drawGrid(win)
+    pygame.display.update()
 
 def drawGrid(surface):
 
