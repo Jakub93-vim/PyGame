@@ -21,9 +21,9 @@ class cube(object):
 
         pass
 
-    def draw(self, surface, eyes=False):
+    def draw(self, surface):
 
-        pygame.draw.rect(surface, self.color, ((),()))
+        pygame.draw.rect(surface, self.color, ((20,50),(10,10)))
 
 class snake(object):
 
@@ -51,6 +51,7 @@ class snake(object):
 def redrawWindow(surface):
 
     drawGrid(win)
+    c.draw(win)
     pygame.display.update()
 
 def drawGrid(surface):
@@ -63,6 +64,7 @@ def drawGrid(surface):
 
 
 s = snake((255,0,0), (10,10))
+c = cube()
 
 def main():
 
