@@ -23,7 +23,7 @@ class cube(object):
 
     def draw(self, surface):
 
-        pygame.draw.rect(surface, self.color, ((20,50),(10,10)))
+        pygame.draw.rect(surface, self.color, ((20 + c.dirnx ,50 + c.dirny),(10,10)))
 
 class snake(object):
 
@@ -40,7 +40,11 @@ class snake(object):
         for key in keys:
 
             if keys[pygame.K_LEFT]:
-                pass
+                c.dirnx = 1
+                c.dirny = 0
+            if keys[pygame.K_UP]:
+                c.dirnx = 0
+                c.dirny = -1
         pass
 
     def draw(self, surface):
