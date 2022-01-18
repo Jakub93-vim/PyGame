@@ -19,9 +19,9 @@ class cube(object):
         self.pos = [20,20]
 
     def move(self, dirnx, dirny):
-
-        self.pos[0] += dirnx
-        self.pos[1] += dirny
+        dis = width/rows
+        self.pos[0] += dirnx * dis
+        self.pos[1] += dirny * dis
 
     def draw(self, surface):
 
