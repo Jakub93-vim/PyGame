@@ -16,14 +16,17 @@ class cube(object):
         self.color = color
         self.dirnx = dirnx
         self.dirny = dirny
+        self.pos = [20,20]
 
     def move(self, dirnx, dirny):
 
-        pass
+        self.pos[0] += dirnx
+        self.pos[1] += dirny
 
     def draw(self, surface):
 
-        pygame.draw.rect(surface, self.color, ((20 + c.dirnx ,50 + c.dirny),(10,10)))
+
+        pygame.draw.rect(surface, self.color, ((self.pos[0],self.pos[1]),(10,10)))
 
 class snake(object):
 
@@ -45,7 +48,7 @@ class snake(object):
             if keys[pygame.K_UP]:
                 c.dirnx = 0
                 c.dirny = -1
-        pass
+        c.move(c.dirnx,c.dirny)
 
     def draw(self, surface):
 
