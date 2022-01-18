@@ -8,6 +8,7 @@ width = 500
 height = 500
 rows = 20
 
+pygame.init()
 win = pygame.display.set_mode((width, height))
 
 class cube(object):
@@ -20,8 +21,7 @@ class cube(object):
 
     def move(self, dirnx, dirny):
         dis = width/rows
-        self.pos[0] += dirnx * dis
-        self.pos[1] += dirny * dis
+        self.pos = (self.pos[0] + dirnx * dis, self.pos[1] + dirny * dis)
 
     def draw(self, surface):
 
@@ -29,10 +29,13 @@ class cube(object):
 
 class snake(object):
     body = []
+    turns = {}
     def __init__(self, color, pos):
 
         self.color = color
-        self.body.append(cube(pos))
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.body.append(cube([126,51]))
         self.dirnx = 0
         self.dirny = 1
         
@@ -46,19 +49,35 @@ class snake(object):
             if keys[pygame.K_LEFT]:
                 self.dirnx = -1
                 self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
             if keys[pygame.K_UP]:
                 self.dirnx = 0
                 self.dirny = -1
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
             if keys[pygame.K_DOWN]:
                 self.dirnx = 0
                 self.dirny = 1
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
             if keys[pygame.K_RIGHT]:
                 self.dirnx = 1
                 self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+        body_part = self.body[0]
+        body_position = body_part.pos
+        if body_position in self.turns:
+            turn = self.turns[body_position]
+            body_part.move(turn[0],turn[1])
+        else:
+            print (self.body[0].pos[0])
+            if self.body[0].pos[0] <= 1:
+                body_part.pos = (body_position[0]+500,body_position[1])
+            body_part.move(self.dirnx, self.dirny)
 
     def draw(self, surface):
 
         self.body[0].draw(surface)
+        self.body[1].draw(surface)
 
 
 def redrawWindow(surface):
@@ -89,6 +108,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                exit()
 
         pygame.time.delay(150)
         s.move()
