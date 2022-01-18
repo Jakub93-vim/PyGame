@@ -14,8 +14,8 @@ class cube(object):
     def __init__(self,start, dirnx=1, dirny=0,color=(255,0,0)):
 
         self.color = color
-        self.dirnx = dirnx
-        self.dirny = dirny
+        self.dirnx = 1
+        self.dirny = 0
         self.pos = start
 
     def move(self, dirnx, dirny):
@@ -58,9 +58,7 @@ class snake(object):
 
     def draw(self, surface):
 
-        for i in self.body:
-
-            i.draw(surface)
+        self.body[0].draw(surface)
 
 
 def redrawWindow(surface):
