@@ -11,12 +11,12 @@ rows = 20
 win = pygame.display.set_mode((width, height))
 
 class cube(object):
-    def __init__(self, dirnx=1, dirny=0,color=(255,0,0)):
+    def __init__(self,start, dirnx=1, dirny=0,color=(255,0,0)):
 
         self.color = color
         self.dirnx = dirnx
         self.dirny = dirny
-        self.pos = [20,20]
+        self.pos = start
 
     def move(self, dirnx, dirny):
         dis = width/rows
@@ -25,15 +25,16 @@ class cube(object):
 
     def draw(self, surface):
 
-
-        pygame.draw.rect(surface, self.color, ((self.pos[0],self.pos[1]),(10,10)))
+        pygame.draw.rect(surface, self.color, ((self.pos[0],self.pos[1]),(24,24)))
 
 class snake(object):
-
+    body = []
     def __init__(self, color, pos):
 
         self.color = color
-        self.pos = pos
+        self.body.append(cube(pos))
+        self.dirnx = 0
+        self.dirny = 1
         
 
     def move(self):
@@ -43,29 +44,30 @@ class snake(object):
         for key in keys:
 
             if keys[pygame.K_LEFT]:
-                c.dirnx = -1
-                c.dirny = 0
+                self.dirnx = -1
+                self.dirny = 0
             if keys[pygame.K_UP]:
-                c.dirnx = 0
-                c.dirny = -1
+                self.dirnx = 0
+                self.dirny = -1
             if keys[pygame.K_DOWN]:
-                c.dirnx = 0
-                c.dirny = 1
+                self.dirnx = 0
+                self.dirny = 1
             if keys[pygame.K_RIGHT]:
-                c.dirnx = 1
-                c.dirny = 0
-        c.move(c.dirnx,c.dirny)
+                self.dirnx = 1
+                self.dirny = 0
 
     def draw(self, surface):
 
-        pass
+        for i in self.body:
+
+            i.draw(surface)
 
 
 def redrawWindow(surface):
 
     win.fill((0, 0, 0))
     drawGrid(win)
-    c.draw(win)
+    s.draw(win)
     pygame.display.update()
 
 def drawGrid(surface):
@@ -77,8 +79,7 @@ def drawGrid(surface):
         pygame.draw.line(surface, (255, 255, 255), (0, spaceBtwn * line), (500, spaceBtwn * line))
 
 
-s = snake((255,0,0), (10,10))
-c = cube()
+s = snake((255,0,0), (51,126))
 
 def main():
 
