@@ -63,6 +63,7 @@ class snake(object):
 
 def redrawWindow(surface):
 
+    win.fill((0, 0, 0))
     drawGrid(win)
     c.draw(win)
     pygame.display.update()
