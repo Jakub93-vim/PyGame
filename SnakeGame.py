@@ -43,11 +43,17 @@ class snake(object):
         for key in keys:
 
             if keys[pygame.K_LEFT]:
-                c.dirnx = 1
+                c.dirnx = -1
                 c.dirny = 0
             if keys[pygame.K_UP]:
                 c.dirnx = 0
                 c.dirny = -1
+            if keys[pygame.K_DOWN]:
+                c.dirnx = 0
+                c.dirny = 1
+            if keys[pygame.K_RIGHT]:
+                c.dirnx = 1
+                c.dirny = 0
         c.move(c.dirnx,c.dirny)
 
     def draw(self, surface):
