@@ -35,7 +35,6 @@ class snake(object):
         self.color = color
         self.head = cube(pos)
         self.body.append(self.head)
-        self.body.append(cube([126,51]))
         self.dirnx = 0
         self.dirny = 1
         
@@ -62,6 +61,8 @@ class snake(object):
                 self.dirnx = 1
                 self.dirny = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+
 
         body_part = self.body[0]
         body_position = body_part.pos
