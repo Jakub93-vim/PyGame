@@ -63,10 +63,10 @@ class snake(object):
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
 
-        for body_position, body_part in enumerate(self.body)
+        for body_position, body_part in enumerate(self.body):
             position = body_part.pos[:]
             if position in self.turns:
-                turn = self.turns[body_position]
+                turn = self.turns[position]
                 body_part.move(turn[0],turn[1])
             else:
                 print (self.body[0].pos[0])
@@ -83,7 +83,6 @@ class snake(object):
     def draw(self, surface):
 
         self.body[0].draw(surface)
-        self.body[1].draw(surface)
 
 
 def redrawWindow(surface):
