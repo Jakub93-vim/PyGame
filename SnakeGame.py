@@ -63,13 +63,9 @@ class snake(object):
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
 
-
-        body_part = self.body[0]
-        body_position = body_part.pos
-
         for body_position, body_part in enumerate(self.body)
             position = body_part.pos[:]
-            if body_position in self.turns:
+            if position in self.turns:
                 turn = self.turns[body_position]
                 body_part.move(turn[0],turn[1])
             else:
