@@ -62,7 +62,7 @@ class snake(object):
                 self.dirny = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-
+        for body_position, body_part in enumerate(self.body)
 
         body_part = self.body[0]
         body_position = body_part.pos
