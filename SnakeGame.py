@@ -62,24 +62,27 @@ class snake(object):
                 self.dirny = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-        for body_position, body_part in enumerate(self.body)
+
 
         body_part = self.body[0]
         body_position = body_part.pos
-        if body_position in self.turns:
-            turn = self.turns[body_position]
-            body_part.move(turn[0],turn[1])
-        else:
-            print (self.body[0].pos[0])
-            if self.body[0].pos[0] <= 1:
-                body_part.pos = (body_position[0] + 500,body_position[1])
-            elif self.body[0].pos[0] >= 500:
-                body_part.pos = (body_position[0] - 500, body_position[1])
-            elif self.body[0].pos[1] <= 1:
-                body_part.pos = (body_position[0],body_position[1] + 500)
-            elif self.body[0].pos[1] >= 500:
-                body_part.pos = (body_position[0],body_position[1] - 500)
-            self.body[0].move(self.dirnx, self.dirny )
+
+        for body_position, body_part in enumerate(self.body)
+            position = body_part.pos[:]
+            if body_position in self.turns:
+                turn = self.turns[body_position]
+                body_part.move(turn[0],turn[1])
+            else:
+                print (self.body[0].pos[0])
+                if self.body[0].pos[0] <= 1:
+                    body_part.pos = (body_position[0] + 500,body_position[1])
+                elif self.body[0].pos[0] >= 500:
+                    body_part.pos = (body_position[0] - 500, body_position[1])
+                elif self.body[0].pos[1] <= 1:
+                    body_part.pos = (body_position[0],body_position[1] + 500)
+                elif self.body[0].pos[1] >= 500:
+                    body_part.pos = (body_position[0],body_position[1] - 500)
+                self.body[0].move(self.dirnx, self.dirny )
 
     def draw(self, surface):
 
