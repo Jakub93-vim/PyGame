@@ -72,14 +72,14 @@ class snake(object):
                 turn = self.turns[position]
                 body_part.move(turn[0],turn[1])
             else:
-                if body_part.pos[0] <= 1:
-                    body_part.pos = (body_part.pos[0] + 500,body_part.pos[1])
-                elif body_part.pos[0] >= 500:
-                    body_part.pos = (body_part.pos[0] - 500, body_part.pos[1])
-                elif body_part.pos[1] <= 1:
-                    body_part.pos = (body_part.pos[0],body_part.pos[1] + 500)
-                elif body_part.pos[1] >= 500:
-                    body_part.pos = (body_part.pos[0],body_part.pos[1] - 500)
+                if body_part.pos[0] <= 1 and body_part.dirnx == -1:
+                    body_part.pos = (body_part.rows,body_part.pos[1])
+                elif body_part.pos[0] >= 20 and body_part.dirnx == 1:
+                    body_part.pos = (0, body_part.pos[1])
+                elif body_part.pos[1] <= 1 and body_part.dirny == -1:
+                    body_part.pos = (body_part.pos[0],body_part.rows)
+                elif body_part.pos[1] >= 20 and body_part.dirny == 1:
+                    body_part.pos = (body_part.pos[0],0)
                 body_part.move(self.dirnx, self.dirny )
 
     def draw(self, surface):
