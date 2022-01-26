@@ -84,7 +84,12 @@ class snake(object):
 
     def draw(self, surface):
 
-        self.body[0].draw(surface)
+        for body_position, body_part in enumerate(self.body):
+
+            if body_position ==0:
+                body_part.draw(surface,True)
+            else:
+                body_part.draw(surface)
 
     def addCube (self):
 
@@ -99,6 +104,9 @@ class snake(object):
             self.body.append(cube((tail.pos[0],tail.pos[1]-1)))
         elif dx == 0 and dy == -1:
             self.body.append(cube((tail.pos[0],tail.pos[1]+1)))
+
+        self.body[-1].dirnx = dx
+        self.body[-1].dirny = dy
 
 
 def redrawWindow(surface):
