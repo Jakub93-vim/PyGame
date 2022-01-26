@@ -121,6 +121,14 @@ class snake(object):
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
 
+    def reset(self, pos):
+        self.head = cube(pos)
+        self.body = []
+        self.body.append(self.head)
+        self.turns = {}
+        self.dirnx = 0
+        self.dirny = 1
+
 
 def redrawWindow(surface):
     global rows, snack
@@ -152,6 +160,16 @@ def randomSnack(rows, snake):
 
     return (x,y)
 
+def message_box(subject, content):
+    root = tk.Tk()
+    root.attributes("-topmost", True)
+    root.withdraw()
+    messagebox.showinfo(subject, content)
+    try:
+        root.destroy()
+    except:
+        pass
+
 
 s = snake((255,0,0), (10,10))
 snack = cube(randomSnack(rows, s), color=(0, 255, 0))
@@ -170,6 +188,13 @@ def main():
         if s.body[0].pos == snack.pos:
             s.addCube()
             snack = cube(randomSnack(rows,s),color=(0,255,0))
+
+        for x in range(len(s.body)):
+            if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
+                print('Score: ', len(s.body))
+                message_box('You Lost!', 'Play again...')
+                s.reset((10, 10))
+                break
 
         pygame.time.delay(150)
         s.move()
