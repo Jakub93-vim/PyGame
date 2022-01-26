@@ -12,6 +12,7 @@ pygame.init()
 win = pygame.display.set_mode((width, height))
 
 class cube(object):
+    rows = 20
     def __init__(self,start, dirnx=1, dirny=0,color=(255,0,0)):
 
         self.color = color
@@ -65,15 +66,15 @@ class snake(object):
 
         for body_position, body_part in enumerate(self.body):
             position = body_part.pos[:]
+            print (body_part.pos[0])
             if position in self.turns:
                 turn = self.turns[position]
                 body_part.move(turn[0],turn[1])
             else:
-                print (self.body[0].pos[0])
-                if self.body[0].pos[0] <= 1:
-                    body_part.pos = (body_position[0] + 500,body_position[1])
-                elif self.body[0].pos[0] >= 500:
-                    body_part.pos = (body_position[0] - 500, body_position[1])
+                if body_part.pos[0] <= 1:
+                    body_part.pos = (body_part.pos[0] + 500,body_part.pos[1])
+                elif body_part.pos[0] >= 500:
+                    body_part.pos = (body_part.pos[0] - 500, body_part.pos[1])
                 elif self.body[0].pos[1] <= 1:
                     body_part.pos = (body_position[0],body_position[1] + 500)
                 elif self.body[0].pos[1] >= 500:
@@ -83,6 +84,11 @@ class snake(object):
     def draw(self, surface):
 
         self.body[0].draw(surface)
+
+    def addCube (self):
+
+        tail = self.body[-1]
+        dx = tail.dirn
 
 
 def redrawWindow(surface):
