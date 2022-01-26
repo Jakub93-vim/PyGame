@@ -21,12 +21,13 @@ class cube(object):
         self.pos = start
 
     def move(self, dirnx, dirny):
-        dis = width/rows
-        self.pos = (self.pos[0] + dirnx * dis, self.pos[1] + dirny * dis)
+        self.dirnx = dirnx
+        self.dirny = dirny
+        self.pos = (self.pos[0] + dirnx, self.pos[1] + dirny)
 
     def draw(self, surface):
-
-        pygame.draw.rect(surface, self.color, ((self.pos[0],self.pos[1]),(24,24)))
+        dis = width / rows
+        pygame.draw.rect(surface, self.color, ((self.pos[0]*dis+1,self.pos[1]*dis+1),(24,24)))
 
 class snake(object):
     body = []
@@ -92,10 +93,11 @@ class snake(object):
 
 
 def redrawWindow(surface):
-
+    global rows, snack
     win.fill((0, 0, 0))
     drawGrid(win)
     s.draw(win)
+    snack.draw(surface)
     pygame.display.update()
 
 def drawGrid(surface):
@@ -106,13 +108,28 @@ def drawGrid(surface):
         pygame.draw.line(surface, (255, 255, 255), (spaceBtwn * line, 0), (spaceBtwn * line, 500))
         pygame.draw.line(surface, (255, 255, 255), (0, spaceBtwn * line), (500, spaceBtwn * line))
 
+def randomSnack(rows, snake):
 
-s = snake((255,0,0), (51,126))
+    positions = snake.body
+
+    while True:
+        x = random.randrange(rows)
+        y = random.randrange(rows)
+        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
+            continue
+        else:
+            break
+
+    return (x,y)
+
+
+s = snake((255,0,0), (10,10))
+snack = cube(randomSnack(rows, s), color=(0, 255, 0))
 
 def main():
-
+    global rows, s, snack
     flag = True
-
+    snack = cube(randomSnack(rows, s), color=(0, 255, 0))
 
     while flag:
 
@@ -120,6 +137,9 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+        if s.body[0].pos == snack.pos:
+            s.addCube()
+            snack = cube(randomSnack(rows,s),color=(0,255,0))
 
         pygame.time.delay(150)
         s.move()
