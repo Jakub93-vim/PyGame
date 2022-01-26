@@ -25,9 +25,19 @@ class cube(object):
         self.dirny = dirny
         self.pos = (self.pos[0] + dirnx, self.pos[1] + dirny)
 
-    def draw(self, surface):
+    def draw(self, surface, eyes = False):
         dis = width / rows
         pygame.draw.rect(surface, self.color, ((self.pos[0]*dis+1,self.pos[1]*dis+1),(24,24)))
+
+        if eyes:
+            centre = dis // 2
+            radius = 3
+            i = self.pos[0]
+            j = self.pos[1]
+            circleMiddle = (i * dis + centre - radius, j * dis + 8)
+            circleMiddle2 = (i * dis + dis - radius * 2, j * dis + 8)
+            pygame.draw.circle(surface, (0, 0, 0), circleMiddle, radius)
+            pygame.draw.circle(surface, (0, 0, 0), circleMiddle2, radius)
 
 class snake(object):
     body = []
