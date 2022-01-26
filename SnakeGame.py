@@ -77,10 +77,11 @@ class snake(object):
 
         for body_position, body_part in enumerate(self.body):
             position = body_part.pos[:]
-            print (body_part.pos[0])
             if position in self.turns:
                 turn = self.turns[position]
                 body_part.move(turn[0],turn[1])
+                if body_position == len(self.body)-1:
+                    self.turns.pop(position)
             else:
                 if body_part.pos[0] <= 1 and body_part.dirnx == -1:
                     body_part.pos = (body_part.rows,body_part.pos[1])
