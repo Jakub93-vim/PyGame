@@ -75,10 +75,10 @@ class snake(object):
                     body_part.pos = (body_part.pos[0] + 500,body_part.pos[1])
                 elif body_part.pos[0] >= 500:
                     body_part.pos = (body_part.pos[0] - 500, body_part.pos[1])
-                elif self.body[0].pos[1] <= 1:
-                    body_part.pos = (body_position[0],body_position[1] + 500)
-                elif self.body[0].pos[1] >= 500:
-                    body_part.pos = (body_position[0],body_position[1] - 500)
+                elif body_part.pos[1] <= 1:
+                    body_part.pos = (body_part.pos[0],body_part.pos[1] + 500)
+                elif body_part.pos[1] >= 500:
+                    body_part.pos = (body_part.pos[0],body_part.pos[1] - 500)
                 body_part.move(self.dirnx, self.dirny )
 
     def draw(self, surface):
