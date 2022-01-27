@@ -20,12 +20,12 @@ class cube(object): # cube class that makes the part of the snake and food
         self.color = color
         self.dirnx = 1 # direction of moving the cube
         self.dirny = 0 # direction of moving the cube
-        self.pos = start
+        self.pos = start # start position, input value when object is created
 
     def move(self, dirnx, dirny): # moving single cube
         self.dirnx = dirnx
         self.dirny = dirny
-        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny) #
 
     def draw(self, surface, eyes = False):
         dis = self.w / self.rows
