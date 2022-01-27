@@ -25,15 +25,15 @@ class cube(object): # cube class that makes the part of the snake and food
     def move(self, dirnx, dirny): # moving single cube
         self.dirnx = dirnx
         self.dirny = dirny
-        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny) #
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny) # changing the position
 
     def draw(self, surface, eyes = False):
         dis = self.w / self.rows
         i = self.pos[0]
         j = self.pos[1]
-        pygame.draw.rect(surface, self.color, (i * dis + 1, j * dis + 1, dis - 2, dis - 2))
+        pygame.draw.rect(surface, self.color, (i * dis + 1, j * dis + 1, dis - 2, dis - 2)) # drawing one cube
 
-        if eyes:
+        if eyes: # draws eyes in the first cube
             centre = dis // 2
             radius = 3
             circleMiddle = (i * dis + centre - radius, j * dis + 8)
@@ -42,8 +42,8 @@ class cube(object): # cube class that makes the part of the snake and food
             pygame.draw.circle(surface, (0, 0, 0), circleMiddle2, radius)
 
 class snake(object):
-    body = []
-    turns = {}
+    body = [] # list of cube objects
+    turns = {} # dictionary of turns that user makes
     def __init__(self, color, pos):
 
         self.color = color
