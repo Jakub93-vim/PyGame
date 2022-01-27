@@ -47,13 +47,13 @@ class snake(object):
     def __init__(self, color, pos):
 
         self.color = color
-        self.head = cube(pos)
-        self.body.append(self.head)
+        self.head = cube(pos) # one cube object
+        self.body.append(self.head) # cube object added to body list
         self.dirnx = 0
         self.dirny = 1
         
 
-    def move(self):
+    def move(self): # capturing the keys and changing the dirn values
 
         keys = pygame.key.get_pressed()
 
