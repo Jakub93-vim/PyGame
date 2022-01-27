@@ -11,18 +11,18 @@ rows = 20
 pygame.init()
 win = pygame.display.set_mode((width, height))
 
-class cube(object):
+class cube(object): # cube class that makes the part of the snake and food
     rows = 20
     w = 500
 
     def __init__(self,start, dirnx=1, dirny=0,color=(255,0,0)):
 
         self.color = color
-        self.dirnx = 1
-        self.dirny = 0
+        self.dirnx = 1 # direction of moving the cube
+        self.dirny = 0 # direction of moving the cube
         self.pos = start
 
-    def move(self, dirnx, dirny):
+    def move(self, dirnx, dirny): # moving single cube
         self.dirnx = dirnx
         self.dirny = dirny
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
