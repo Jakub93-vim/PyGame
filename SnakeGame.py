@@ -62,7 +62,7 @@ class snake(object):
             if keys[pygame.K_LEFT]:
                 self.dirnx = -1
                 self.dirny = 0
-                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny] # adding into dict head position and direction of the move
             if keys[pygame.K_UP]:
                 self.dirnx = 0
                 self.dirny = -1
@@ -77,9 +77,9 @@ class snake(object):
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
 
-        for body_position, body_part in enumerate(self.body):
-            position = body_part.pos[:]
-            if position in self.turns:
+        for body_position, body_part in enumerate(self.body): # body position as a count and body part from the body list
+            position = body_part.pos[:] # position of the body part
+            if position in self.turns: #
                 turn = self.turns[position]
                 body_part.move(turn[0],turn[1])
                 if body_position == len(self.body)-1:
