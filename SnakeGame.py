@@ -93,7 +93,7 @@ class snake(object):
                     body_part.pos = (body_part.pos[0],body_part.rows)
                 elif body_part.pos[1] >= 20 and body_part.dirny == 1:
                     body_part.pos = (body_part.pos[0],0)
-                body_part.move(body_part.dirnx, body_part.dirny )
+                body_part.move(body_part.dirnx, body_part.dirny ) # moving the snake
 
     def draw(self, surface):
 
@@ -104,12 +104,12 @@ class snake(object):
             else:
                 body_part.draw(surface)
 
-    def addCube (self):
+    def addCube (self): # adding cube to the snake
 
         tail = self.body[-1]
         dx, dy = tail.dirnx, tail.dirny
 
-        if dx == 1 and dy == 0:
+        if dx == 1 and dy == 0: # where to put the cube
             self.body.append(cube((tail.pos[0]-1,tail.pos[1])))
         elif dx == -1 and dy ==0:
             self.body.append(cube((tail.pos[0]+1,tail.pos[1])))
@@ -121,7 +121,7 @@ class snake(object):
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
 
-    def reset(self, pos):
+    def reset(self, pos): # reseting the game
         self.head = cube(pos)
         self.body = []
         self.body.append(self.head)
@@ -130,7 +130,7 @@ class snake(object):
         self.dirny = 1
 
 
-def redrawWindow(surface):
+def redrawWindow(surface): # drawing all the objects on the screen
     global rows, snack
     win.fill((0, 0, 0))
     drawGrid(win)
@@ -138,7 +138,7 @@ def redrawWindow(surface):
     snack.draw(surface)
     pygame.display.update()
 
-def drawGrid(surface):
+def drawGrid(surface): # drawing the grid for the snake
 
     numLines = 20
     spaceBtwn = width/numLines
@@ -146,14 +146,14 @@ def drawGrid(surface):
         pygame.draw.line(surface, (255, 255, 255), (spaceBtwn * line, 0), (spaceBtwn * line, 500))
         pygame.draw.line(surface, (255, 255, 255), (0, spaceBtwn * line), (500, spaceBtwn * line))
 
-def randomSnack(rows, snake):
+def randomSnack(rows, snake): # snack for the snake
 
     positions = snake.body
 
     while True:
         x = random.randrange(rows)
         y = random.randrange(rows)
-        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
+        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0: # if the position of the snack is on the snake, make new position
             continue
         else:
             break
@@ -172,7 +172,7 @@ def message_box(subject, content):
 
 
 s = snake((255,0,0), (10,10))
-snack = cube(randomSnack(rows, s), color=(0, 255, 0))
+snack = cube(randomSnack(rows, s), color=(0, 255, 0)) # snack object from cube class
 
 def main():
     global rows, s, snack
@@ -185,11 +185,11 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-        if s.body[0].pos == snack.pos:
+        if s.body[0].pos == snack.pos: # if snakes eats the snack, make a new body part to him
             s.addCube()
             snack = cube(randomSnack(rows,s),color=(0,255,0))
 
-        for x in range(len(s.body)):
+        for x in range(len(s.body)): # if snake goes into his body, it will reset the game and show message
             if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
                 print('Score: ', len(s.body))
                 message_box('You Lost!', 'Play again...')
