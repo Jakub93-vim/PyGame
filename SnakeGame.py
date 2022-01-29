@@ -77,16 +77,16 @@ class snake(object):
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
 
-        for body_position, body_part in enumerate(self.body): # body position as a count and body part from the body list
+        for body_position, body_part in enumerate(self.body): # body position as a count number and body part from the body list
             position = body_part.pos[:] # position of the body part
-            if position in self.turns: #
+            if position in self.turns: # if the part is turning
                 turn = self.turns[position]
-                body_part.move(turn[0],turn[1])
+                body_part.move(turn[0],turn[1]) # moving the body part according to turns
                 if body_position == len(self.body)-1:
                     self.turns.pop(position)
-            else:
-                if body_part.pos[0] <= 1 and body_part.dirnx == -1:
-                    body_part.pos = (body_part.rows,body_part.pos[1])
+            else: # if the part is not turning, move it, if it is at the edge of the screen, move it on the other side
+                if body_part.pos[0] <= 1 and body_part.dirnx == -1: # if the part goes on the left side
+                    body_part.pos = (body_part.rows,body_part.pos[1]) # move it to the right side
                 elif body_part.pos[0] >= 20 and body_part.dirnx == 1:
                     body_part.pos = (0, body_part.pos[1])
                 elif body_part.pos[1] <= 1 and body_part.dirny == -1:
