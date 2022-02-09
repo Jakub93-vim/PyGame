@@ -8,6 +8,27 @@ win = pygame.display.set_mode((width, height))
 
 run = True
 
+class Token(object):
+
+    def __init__(self, shape, color, inside_circle, position):
+        self.shape = shape
+        self.color = color
+        self.inside_circle = inside_circle
+        self.position = position
+        
+    def draw (self, surface):
+        
+        if self.shape == 'circle':
+            pygame.draw.circle(surface, self.color, self.position, 20)
+        
+    def select(self):
+        pass
+    def move(self):
+        pass
+
+Black_1 = Token('circle', (255,255,255), False, (550,420))
+
+
 def drawGamefield(surface):
 
     numCircles = 3
@@ -22,11 +43,10 @@ def drawGamefield(surface):
                                                         height/5 + spaceBetween*circle_y), 40, width = 2)
 
 
-
-
 def redrawWindow():
 
     drawGamefield(win)
+    Black_1.draw(win)
     pygame.display.update()
 
 def mainLoop ():
