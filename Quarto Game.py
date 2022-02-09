@@ -17,10 +17,15 @@ class Token(object):
         self.position = position
         self.size = size
         
-    def returnMiddle(self,position):
+    def returnMiddleOfRect(self,position):
         x = position[0] + self.size/2
         y = position[1] + self.size/2
         return x,y
+    
+    def middleToCorner(self, position):
+        x = position[0] - self.size / 2
+        y = position[1] - self.size / 2
+        return int(x),int(y)
         
     def draw (self, surface):
         
@@ -30,23 +35,32 @@ class Token(object):
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
         if self.shape == 'rect':
-            pygame.draw.rect(surface, self.color, (self.position[0],self.position[1],self.size,self.size))
+            x_moved = self.middleToCorner(self.position)[0]
+            y_moved = self.middleToCorner(self.position)[1]
+            pygame.draw.rect(surface, self.color, (x_moved,y_moved,self.size,self.size))
             if self.inside_circle:
-                pygame.draw.circle(surface, (0,0,0), self.returnMiddle(self.position), 10)
+                pygame.draw.circle(surface, (0,0,0), self.position, 10)
+
     def select(self):
         pass
     def move(self):
         pass
 
 tokens = []
+red = (170,0,0)
+blue = (0,40,160)
 
-Black_1 = Token('circle', (255,255,255), False, (550,420), 20)
-Black_2 = Token('rect', (255,255,255), False, (500,420), 40)
-Black_3 = Token('rect', (255,255,255), True, (450,420), 40)
+Red_1 = Token('circle', red , False, (320,585), 20)
+Red_2 = Token('rect', red , False, (390,585), 40)
+Red_3 = Token('rect', red , True, (460,585), 40)
 
-tokens.append(Black_1)
-tokens.append(Black_2)
-tokens.append(Black_3)
+Blue_1 = Token('circle', blue , False, (320,660), 20)
+Blue_2 = Token('rect', blue , False, (390,660), 40)
+Blue_3 = Token('rect', blue , True, (460,660), 40)
+
+tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
+#tokens.append(Red_2)
+#tokens.append(Red_3)
 
 def drawGamefield(surface):
 
