@@ -20,14 +20,20 @@ class Token(object):
         
         if self.shape == 'circle':
             pygame.draw.circle(surface, self.color, self.position, 20)
-        
+        if self.shape == 'rect':
+            pygame.draw.rect(surface, self.color, self.position)
     def select(self):
         pass
     def move(self):
         pass
 
-Black_1 = Token('circle', (255,255,255), False, (550,420))
+tokens = []
 
+Black_1 = Token('circle', (255,255,255), False, (550,420))
+Black_2 = Token('rect', (255,255,255), False, (500,420,20,20))
+
+tokens.append(Black_1)
+tokens.append(Black_2)
 
 def drawGamefield(surface):
 
@@ -46,7 +52,8 @@ def drawGamefield(surface):
 def redrawWindow():
 
     drawGamefield(win)
-    Black_1.draw(win)
+    for i in tokens:
+        i.draw(win)
     pygame.display.update()
 
 def mainLoop ():
