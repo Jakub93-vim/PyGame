@@ -16,11 +16,6 @@ class Token(object):
         self.inside_circle = inside_circle
         self.position = position
         self.size = size
-        
-    def returnMiddleOfRect(self,position):
-        x = position[0] + self.size/2
-        y = position[1] + self.size/2
-        return x,y
     
     def middleToCorner(self, position):
         x = position[0] - self.size / 2
@@ -44,7 +39,7 @@ class Token(object):
     def select(self):
         pass
     def move(self):
-        pass
+        self.position = (self.position[0] + 50, self.position[1])
 
 tokens = []
 red = (170,0,0)
@@ -59,8 +54,6 @@ Blue_2 = Token('rect', blue , False, (390,660), 40)
 Blue_3 = Token('rect', blue , True, (460,660), 40)
 
 tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
-#tokens.append(Red_2)
-#tokens.append(Red_3)
 
 def drawGamefield(surface):
 
@@ -91,6 +84,14 @@ def mainLoop ():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+
+        if event.type == pygame.MOUSEBUTTONUP:
+
+            print ('mouse button')
+            Red_1.move()
+
+        print (pygame.mouse.get_pos())
+
 
         pygame.time.delay(150)
 
