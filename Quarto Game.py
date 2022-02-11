@@ -25,7 +25,7 @@ class Token(object):
     def draw (self, surface):
         
         if self.shape == 'circle':
-            pygame.draw.circle(surface, self.color, self.position, self.size)
+            pygame.draw.circle(surface, self.color, self.position, self.size/2)
             if self.inside_circle:
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
@@ -36,6 +36,19 @@ class Token(object):
             if self.inside_circle:
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
+    def mouseAboveToken(self, token):
+
+        self.isAbove = False
+
+        mouse_x = pygame.mouse.get_pos()[0]
+        mouse_y = pygame.mouse.get_pos()[1]
+
+
+        if token.position[0] < mouse_x and token.position[1] > mouse_x:
+            if token.position[0] < mouse_y and token.position[1] > mouse_y:
+                self.isAbove = True
+
+
     def select(self):
         pass
     def move(self):
@@ -45,11 +58,11 @@ tokens = []
 red = (170,0,0)
 blue = (0,40,160)
 
-Red_1 = Token('circle', red , False, (320,585), 20)
+Red_1 = Token('circle', red , False, (320,585), 40)
 Red_2 = Token('rect', red , False, (390,585), 40)
 Red_3 = Token('rect', red , True, (460,585), 40)
 
-Blue_1 = Token('circle', blue , False, (320,660), 20)
+Blue_1 = Token('circle', blue , False, (320,660), 40)
 Blue_2 = Token('rect', blue , False, (390,660), 40)
 Blue_3 = Token('rect', blue , True, (460,660), 40)
 
@@ -87,10 +100,10 @@ def mainLoop ():
 
         if event.type == pygame.MOUSEBUTTONUP:
 
-            print ('mouse button')
-            Red_1.move()
-
-        print (pygame.mouse.get_pos())
+            #print ('mouse button')
+            for x in tokens:
+                if Token.mouseAboveToken(x):
+                    print ('you are above me')
 
 
         pygame.time.delay(150)
