@@ -43,12 +43,14 @@ class Token(object):
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
 
-        print ('i was here')
+
         if token.position[0] < mouse_x and token.position[1] > mouse_x:
-            print ('even here')
+
             if token.position[0] < mouse_y and token.position[1] > mouse_y:
                 print ('also here')
                 self.isAbove = True
+
+        return self.isAbove
 
 
     def select(self):
@@ -104,6 +106,7 @@ def mainLoop ():
 
             #print ('mouse button')
             for x in tokens:
+                print ('here')
                 if x.mouseAboveToken(x):
                     print ('you are above me')
 
