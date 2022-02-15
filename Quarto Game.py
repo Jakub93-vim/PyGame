@@ -16,6 +16,7 @@ class Token(object):
         self.inside_circle = inside_circle
         self.position = position
         self.size = size
+
     
     def middleToCorner(self, position):
         x = position[0] - self.size / 2
@@ -45,10 +46,9 @@ class Token(object):
 
 
         if token.position[0] < mouse_x and token.position[1] > mouse_x:
-
             if token.position[0] < mouse_y and token.position[1] > mouse_y:
-                print ('also here')
                 self.isAbove = True
+                print (token.position[0], mouse_x)
 
         return self.isAbove
 
@@ -102,13 +102,12 @@ def mainLoop ():
                 pygame.quit()
                 exit()
 
-        if event.type == pygame.MOUSEBUTTONUP:
-
-            #print ('mouse button')
+        if pygame.mouse.get_pressed() == (1,0,0):
             for x in tokens:
-                print ('here')
                 if x.mouseAboveToken(x):
                     print ('you are above me')
+                    break
+            print ('end')
 
 
         pygame.time.delay(150)
