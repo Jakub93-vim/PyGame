@@ -43,12 +43,18 @@ class Token(object):
 
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
+        half_size = token.size/2
 
 
-        if token.position[0] < mouse_x and token.position[1] > mouse_x:
-            if token.position[0] < mouse_y and token.position[1] > mouse_y:
+        if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x:
+            if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y:
                 self.isAbove = True
-                print (token.position[0], mouse_x)
+                print ('x souradnice:',token.position[0],
+                       'x pozice mysi:', mouse_x,
+                       'x + velikost:', token.position[0] + token.size,"\n",
+                       'y souradnice:',token.position[1],
+                       'y pozice mysi:', mouse_y,
+                       'y + velikost:', token.position[1] + token.size)
 
         return self.isAbove
 
@@ -106,7 +112,6 @@ def mainLoop ():
             for x in tokens:
                 if x.mouseAboveToken(x):
                     print ('you are above me')
-                    break
             print ('end')
 
 
