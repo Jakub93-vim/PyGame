@@ -49,18 +49,21 @@ class Token(object):
         if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x:
             if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y:
                 self.isAbove = True
+                #position info
+                '''
                 print ('x souradnice:',token.position[0],
                        'x pozice mysi:', mouse_x,
                        'x + velikost:', token.position[0] + token.size,"\n",
                        'y souradnice:',token.position[1],
                        'y pozice mysi:', mouse_y,
                        'y + velikost:', token.position[1] + token.size)
+                '''
 
         return self.isAbove
 
 
     def select(self):
-        pass
+        self.color = (230,170,50)
     def move(self):
         self.position = (self.position[0] + 50, self.position[1])
 
@@ -111,8 +114,8 @@ def mainLoop ():
         if pygame.mouse.get_pressed() == (1,0,0):
             for x in tokens:
                 if x.mouseAboveToken(x):
-                    print ('you are above me')
-            print ('end')
+
+                    x.select()
 
 
         pygame.time.delay(150)
