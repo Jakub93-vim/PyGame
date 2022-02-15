@@ -7,6 +7,7 @@ pygame.init()
 win = pygame.display.set_mode((width, height))
 
 run = True
+selected = False
 
 class Token(object):
 
@@ -63,7 +64,12 @@ class Token(object):
 
 
     def select(self):
-        self.color = (230,170,50)
+        global selected
+
+        if not selected:
+            self.color = (230,170,50)
+            selected = True
+
     def move(self):
         self.position = (self.position[0] + 50, self.position[1])
 
@@ -89,10 +95,15 @@ def drawGamefield(surface):
     pygame.draw.circle(surface, (255,255,255), (width/2,height/2), 380, width = 5)
     pygame.draw.rect(surface, (255,255,255), (290,550,210,200), 2, border_radius=10)
 
-    for circle_x in range(numCircles):
-        for circle_y in range (numCircles):
-            pygame.draw.circle(surface, (255,255,255), (width/3 + spaceBetween*circle_x -20,
-                                                        height/5 + spaceBetween*circle_y), 40, width = 2)
+    for x in range(numCircles):
+        for y in range (numCircles):
+            circle_x_pos = width/3 + spaceBetween*x -20
+            circle_y_pos = height/5 + spaceBetween*y
+            pygame.draw.circle(surface, (255,255,255), (circle_x_pos, circle_y_pos), 40, width = 2)
+
+            print (circle_x_pos, circle_y_pos,"\n")
+
+
 
 
 def redrawWindow():
@@ -114,7 +125,6 @@ def mainLoop ():
         if pygame.mouse.get_pressed() == (1,0,0):
             for x in tokens:
                 if x.mouseAboveToken(x):
-
                     x.select()
 
 
