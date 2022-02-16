@@ -73,6 +73,7 @@ class Token(object):
     def move(self):
         self.position = (self.position[0] + 50, self.position[1])
 
+
 tokens = []
 red = (170,0,0)
 blue = (0,40,160)
@@ -110,7 +111,6 @@ def drawGamefield(surface):
 
 
 def circPosDict(setOfPosition):
-
     positionDict = {}
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
@@ -119,9 +119,7 @@ def circPosDict(setOfPosition):
         for letter in letterPosition:
             for number in numberPosition:
                 positionDict[letter + number] = value
-
-
-    print(positionDict)
+    return positionDict
 
 def redrawWindow():
 
