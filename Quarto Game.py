@@ -111,6 +111,7 @@ def drawGamefield(surface):
 
 
 def circPosDict(setOfPosition):
+    global positionDict
     positionDict = {}
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
@@ -120,6 +121,7 @@ def circPosDict(setOfPosition):
             for number in numberPosition:
                 positionDict[letter + number] = value
     return positionDict
+
 
 def redrawWindow():
 
