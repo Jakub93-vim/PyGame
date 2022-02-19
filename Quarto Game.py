@@ -71,7 +71,8 @@ class Token(object):
             selected = True
 
     def move(self):
-        self.position = (self.position[0] + 50, self.position[1])
+        self.position = (positionDict['A1'][0], positionDict['A1'][1])
+        print (positionDict)
 
 
 tokens = []
@@ -109,10 +110,8 @@ def drawGamefield(surface):
 
     circPosDict(setOfPosition)
 
-
+positionDict = {}
 def circPosDict(setOfPosition):
-    global positionDict
-    positionDict = {}
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
 
@@ -120,7 +119,7 @@ def circPosDict(setOfPosition):
         for letter in letterPosition:
             for number in numberPosition:
                 positionDict[letter + number] = value
-    return positionDict
+
 
 
 def redrawWindow():
@@ -143,6 +142,7 @@ def mainLoop ():
             for x in tokens:
                 if x.mouseAboveToken(x):
                     x.select()
+                    x.move()
 
 
         pygame.time.delay(150)
