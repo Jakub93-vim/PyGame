@@ -72,7 +72,7 @@ class Token(object):
 
     def move(self):
         self.position = (positionDict['A1'][0], positionDict['A1'][1])
-        print (positionDict)
+        print(positionDict)
 
 
 tokens = []
@@ -104,12 +104,17 @@ def drawGamefield(surface):
             circle_y_pos = height/5 + spaceBetween*y
             pygame.draw.circle(surface, (255,255,255), (circle_x_pos, circle_y_pos), 40, width = 2)
 
+            print (circle_x_pos, circle_y_pos)
+
             circle_x_pos = int(circle_x_pos)
             circle_y_pos = int(circle_y_pos)
             setOfPosition.add((circle_x_pos,circle_y_pos))
+            print(setOfPosition)
+
+            #values from the end
 
     circPosDict(setOfPosition)
-
+    print (setOfPosition)
 positionDict = {}
 def circPosDict(setOfPosition):
     letterPosition = ["A","B","C"]
@@ -119,6 +124,8 @@ def circPosDict(setOfPosition):
         for letter in letterPosition:
             for number in numberPosition:
                 positionDict[letter + number] = value
+
+
 
 
 
