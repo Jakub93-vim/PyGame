@@ -89,7 +89,7 @@ Blue_3 = Token('rect', blue , True, (460,660), 40)
 
 tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
 
-setOfPosition = set()
+listOfPosition = []
 def drawGamefield(surface):
 
     numCircles = 3
@@ -104,23 +104,22 @@ def drawGamefield(surface):
             circle_y_pos = height/5 + spaceBetween*y
             pygame.draw.circle(surface, (255,255,255), (circle_x_pos, circle_y_pos), 40, width = 2)
 
-            print (circle_x_pos, circle_y_pos)
-
             circle_x_pos = int(circle_x_pos)
             circle_y_pos = int(circle_y_pos)
-            setOfPosition.add((circle_x_pos,circle_y_pos))
-            print(setOfPosition)
+            if ((circle_x_pos, circle_y_pos)) not in listOfPosition:
+                listOfPosition.append((circle_x_pos, circle_y_pos))
+            print(circle_x_pos, circle_y_pos)
+            print (listOfPosition)
 
-            #values from the end
+    circPosDict(listOfPosition)
 
-    circPosDict(setOfPosition)
-    print (setOfPosition)
 positionDict = {}
-def circPosDict(setOfPosition):
+def circPosDict(listOfPosition):
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
 
-    for value in setOfPosition:
+
+    for value in listOfPosition:
         for letter in letterPosition:
             for number in numberPosition:
                 positionDict[letter + number] = value
