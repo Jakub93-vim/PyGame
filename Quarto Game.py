@@ -108,8 +108,6 @@ def drawGamefield(surface):
             circle_y_pos = int(circle_y_pos)
             if ((circle_x_pos, circle_y_pos)) not in listOfPosition:
                 listOfPosition.append((circle_x_pos, circle_y_pos))
-            print(circle_x_pos, circle_y_pos)
-            print (listOfPosition)
 
     circPosDict(listOfPosition)
 
@@ -118,14 +116,14 @@ def circPosDict(listOfPosition):
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
 
+    print (listOfPosition)
 
-    for value in listOfPosition:
+    for value_pos, value in enumerate(listOfPosition):
         for letter in letterPosition:
             for number in numberPosition:
-                positionDict[letter + number] = value
-
-
-
+                print (value)
+                print(positionDict)
+                positionDict[letter + number] = value[value_pos]
 
 
 def redrawWindow():
