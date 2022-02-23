@@ -116,14 +116,12 @@ def circPosDict(listOfPosition):
     letterPosition = ["A","B","C"]
     numberPosition = ["1","2","3"]
 
-    print (listOfPosition)
-
-    for value_pos, value in enumerate(listOfPosition):
-        for letter in letterPosition:
-            for number in numberPosition:
-                print (value)
-                print(positionDict)
-                positionDict[letter + number] = value[value_pos]
+    listCount = 0
+    for letter in letterPosition:
+        for number in numberPosition:
+            print(positionDict)
+            positionDict[letter + number] = listOfPosition[listCount]
+            listCount += 1
 
 
 def redrawWindow():
