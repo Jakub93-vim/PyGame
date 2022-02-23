@@ -72,15 +72,11 @@ class Token(object):
 
     def move(self):
 
-        x_pos = self.position[0]
-        y_pos = self.position[1]
-
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
         for circPosition in  listOfPosition:
-            if mouse_x + 20 and mouse_y + 20
-        self.position = (positionDict['A1'][0], positionDict['A1'][1])
-        print(positionDict)
+            if (mouse_x - circPosition[0])^2 + (mouse_y - circPosition[1])^2 < 20:
+                self.position = [circPosition[0], circPosition[1] ]
 
 
 tokens = []
