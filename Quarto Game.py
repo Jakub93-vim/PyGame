@@ -71,6 +71,10 @@ class Token(object):
             selected = True
 
     def move(self):
+
+        mouse_x = pygame.mouse.get_pos()[0]
+        mouse_y = pygame.mouse.get_pos()[1]
+
         self.position = (positionDict['A1'][0], positionDict['A1'][1])
         print(positionDict)
 
@@ -119,7 +123,6 @@ def circPosDict(listOfPosition):
     listCount = 0
     for letter in letterPosition:
         for number in numberPosition:
-            print(positionDict)
             positionDict[letter + number] = listOfPosition[listCount]
             listCount += 1
 
@@ -144,7 +147,9 @@ def mainLoop ():
             for x in tokens:
                 if x.mouseAboveToken(x):
                     x.select()
-                    x.move()
+                    if pygame.mouse.get_pressed() == (1,0,0):
+
+                        print ('mouse second click')
 
 
         pygame.time.delay(150)
