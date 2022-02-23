@@ -72,9 +72,13 @@ class Token(object):
 
     def move(self):
 
+        x_pos = self.position[0]
+        y_pos = self.position[1]
+
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
-
+        for circPosition in  listOfPosition:
+            if mouse_x + 20 and mouse_y + 20
         self.position = (positionDict['A1'][0], positionDict['A1'][1])
         print(positionDict)
 
@@ -136,6 +140,7 @@ def redrawWindow():
 
 def mainLoop ():
 
+    numOfClicks = 0
     while run:
 
         for event in pygame.event.get():
@@ -144,12 +149,18 @@ def mainLoop ():
                 exit()
 
         if pygame.mouse.get_pressed() == (1,0,0):
+            numOfClicks += 1
             for x in tokens:
-                if x.mouseAboveToken(x):
-                    x.select()
-                    if pygame.mouse.get_pressed() == (1,0,0):
+                if numOfClicks == 1:
+                    if x.mouseAboveToken(x):
+                        x.select()
+                        print (numOfClicks)
+                if numOfClicks == 2:
+                    x.move()
+                    print ('second click')
+                    numOfClicks = 0
 
-                        print ('mouse second click')
+
 
 
         pygame.time.delay(150)
