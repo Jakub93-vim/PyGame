@@ -9,7 +9,7 @@ win = pygame.display.set_mode((width, height))
 run = True
 selected = False
 
-class Token(object):
+class Token():
 
     def __init__(self, player, shape, color, inside_circle, position, size):
         self.player = player
@@ -40,50 +40,48 @@ class Token(object):
             if self.inside_circle:
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
-    def mouseAboveToken(self, token):
+def mouseAboveToken(token):
 
-        self.isAbove = False
+    isAbove = False
 
-        mouse_x = pygame.mouse.get_pos()[0]
-        mouse_y = pygame.mouse.get_pos()[1]
-        half_size = token.size/2
-
-
-        if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x:
-            if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y:
-                self.isAbove = True
-                #position info
-                '''
-                print ('x souradnice:',token.position[0],
-                       'x pozice mysi:', mouse_x,
-                       'x + velikost:', token.position[0] + token.size,"\n",
-                       'y souradnice:',token.position[1],
-                       'y pozice mysi:', mouse_y,
-                       'y + velikost:', token.position[1] + token.size)
-                '''
-
-        return self.isAbove
+    mouse_x = pygame.mouse.get_pos()[0]
+    mouse_y = pygame.mouse.get_pos()[1]
+    half_size = token.size/2
 
 
-    def select(self, token):
-        token.selected = True
-        if token.selected:
-            token.color = (230,170,50)
+    if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x:
+        if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y:
+            isAbove = True
+            #position info
+            '''
+            print ('x souradnice:',token.position[0],
+                   'x pozice mysi:', mouse_x,
+                   'x + velikost:', token.position[0] + token.size,"\n",
+                   'y souradnice:',token.position[1],
+                   'y pozice mysi:', mouse_y,
+                   'y + velikost:', token.position[1] + token.size)
+            '''
 
-    def move(self, token):
+    return isAbove
 
-        mouse_x = pygame.mouse.get_pos()[0]
-        mouse_y = pygame.mouse.get_pos()[1]
-        for circPosition in  listOfPosition:
-            print ('circle', circPosition)
-            print ('mouse', mouse_x, mouse_y)
-            if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
-                token.position = [circPosition[0], circPosition[1]]
-                print ('you are in the circle')
-                if token.player == 1:
-                    token.color = red
-                if token.player == 2:
-                    token.color = blue
+
+def select(token):
+    token.color = (230,170,50)
+
+def move(token):
+
+    mouse_x = pygame.mouse.get_pos()[0]
+    mouse_y = pygame.mouse.get_pos()[1]
+    for circPosition in  listOfPosition:
+        print ('move function, circle', circPosition)
+        print ('move function, mouse', mouse_x, mouse_y)
+        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
+            token.position = [circPosition[0], circPosition[1]]
+            print ('you are in the circle')
+            if token.player == 1:
+                token.color = red
+            if token.player == 2:
+                token.color = blue
 
 
 tokens = []
@@ -152,15 +150,20 @@ def mainLoop ():
                 exit()
 
         if pygame.mouse.get_pressed() == (1,0,0):
-            numOfClicks += 1
+
+
             print (pygame.mouse.get_pos())
             for x in tokens:
-                if numOfClicks == 1:
-                    if x.mouseAboveToken(x):
-                        x.select(x)
-                        print ('num of clicks', numOfClicks)
-                if numOfClicks == 2 and x.selected == True:
-                    x.move(x)
+                if numOfClicks == 0:
+                    if mouseAboveToken(x):
+                        numOfClicks += 1
+                        x.selected = True
+                        select(x)
+
+                print (numOfClicks)
+                print (x.selected)
+                if numOfClicks == 1 and x.selected == True:
+                    move(x)
                     print ('second click')
                     numOfClicks = 0
 
