@@ -65,12 +65,12 @@ class Token(object):
         return self.isAbove
 
 
-    def select(self):
-        self.selected = True
-        if self. selected:
-            self.color = (230,170,50)
+    def select(self, token):
+        token.selected = True
+        if token.selected:
+            token.color = (230,170,50)
 
-    def move(self):
+    def move(self, token):
 
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
@@ -78,12 +78,12 @@ class Token(object):
             print ('circle', circPosition)
             print ('mouse', mouse_x, mouse_y)
             if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
-                self.position = [circPosition[0], circPosition[1]]
+                token.position = [circPosition[0], circPosition[1]]
                 print ('you are in the circle')
-                if self.player == 1:
-                    self.color = red
-                if self.player == 2:
-                    self.color = blue
+                if token.player == 1:
+                    token.color = red
+                if token.player == 2:
+                    token.color = blue
 
 
 tokens = []
@@ -157,10 +157,10 @@ def mainLoop ():
             for x in tokens:
                 if numOfClicks == 1:
                     if x.mouseAboveToken(x):
-                        x.select()
+                        x.select(x)
                         print ('num of clicks', numOfClicks)
                 if numOfClicks == 2 and x.selected == True:
-                    x.move()
+                    x.move(x)
                     print ('second click')
                     numOfClicks = 0
 
