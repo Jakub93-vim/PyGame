@@ -11,12 +11,14 @@ selected = False
 
 class Token(object):
 
-    def __init__(self, shape, color, inside_circle, position, size):
+    def __init__(self, player, shape, color, inside_circle, position, size):
+        self.player = player
         self.shape = shape
         self.color = color
         self.inside_circle = inside_circle
         self.position = position
         self.size = size
+        self.selected = False
 
     
     def middleToCorner(self, position):
@@ -64,11 +66,9 @@ class Token(object):
 
 
     def select(self):
-        global selected
-
-        if not selected:
+        self.selected = True
+        if self. selected:
             self.color = (230,170,50)
-            selected = True
 
     def move(self):
 
@@ -80,19 +80,23 @@ class Token(object):
             if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
                 self.position = [circPosition[0], circPosition[1]]
                 print ('you are in the circle')
+                if self.player == 1:
+                    self.color = red
+                if self.player == 2:
+                    self.color = blue
 
 
 tokens = []
 red = (170,0,0)
 blue = (0,40,160)
 
-Red_1 = Token('circle', red , False, (320,585), 40)
-Red_2 = Token('rect', red , False, (390,585), 40)
-Red_3 = Token('rect', red , True, (460,585), 40)
+Red_1 = Token(1,'circle', red , False, (320,585), 40)
+Red_2 = Token(1,'rect', red , False, (390,585), 40)
+Red_3 = Token(1,'rect', red , True, (460,585), 40)
 
-Blue_1 = Token('circle', blue , False, (320,660), 40)
-Blue_2 = Token('rect', blue , False, (390,660), 40)
-Blue_3 = Token('rect', blue , True, (460,660), 40)
+Blue_1 = Token(2,'circle', blue , False, (320,660), 40)
+Blue_2 = Token(2,'rect', blue , False, (390,660), 40)
+Blue_3 = Token(2,'rect', blue , True, (460,660), 40)
 
 tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
 
@@ -155,7 +159,7 @@ def mainLoop ():
                     if x.mouseAboveToken(x):
                         x.select()
                         print ('num of clicks', numOfClicks)
-                if numOfClicks == 2:
+                if numOfClicks == 2 and x.selected == True:
                     x.move()
                     print ('second click')
                     numOfClicks = 0
