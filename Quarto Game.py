@@ -75,7 +75,8 @@ class Token(object):
         mouse_x = pygame.mouse.get_pos()[0]
         mouse_y = pygame.mouse.get_pos()[1]
         for circPosition in  listOfPosition:
-            print (circPosition)
+            print ('circle', circPosition)
+            print ('mouse', mouse_x, mouse_y)
             if (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2 < 20:
                 self.position = [circPosition[0], circPosition[1]]
 
@@ -152,7 +153,7 @@ def mainLoop ():
                 if numOfClicks == 1:
                     if x.mouseAboveToken(x):
                         x.select()
-                        print (numOfClicks)
+                        print ('num of clicks', numOfClicks)
                 if numOfClicks == 2:
                     x.move()
                     print ('second click')
