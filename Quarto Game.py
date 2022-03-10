@@ -1,4 +1,4 @@
-import pygame
+import pygame, math
 
 width = 800
 height = 800
@@ -77,8 +77,9 @@ class Token(object):
         for circPosition in  listOfPosition:
             print ('circle', circPosition)
             print ('mouse', mouse_x, mouse_y)
-            if (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2 < 20:
+            if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
                 self.position = [circPosition[0], circPosition[1]]
+                print ('you are in the circle')
 
 
 tokens = []
