@@ -65,24 +65,6 @@ def mouseAboveToken(token):
     return isAbove
 
 
-def select(token):
-    token.color = (230,170,50)
-
-def move(token):
-
-    mouse_x = pygame.mouse.get_pos()[0]
-    mouse_y = pygame.mouse.get_pos()[1]
-    for circPosition in  listOfPosition:
-        print ('move function, circle', circPosition)
-        print ('move function, mouse', mouse_x, mouse_y)
-        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
-            token.position = [circPosition[0], circPosition[1]]
-            print ('you are in the circle')
-            if token.player == 1:
-                token.color = red
-            if token.player == 2:
-                token.color = blue
-
 
 tokens = []
 red = (170,0,0)
@@ -97,6 +79,7 @@ Blue_2 = Token(2,'rect', blue , False, (390,660), 40)
 Blue_3 = Token(2,'rect', blue , True, (460,660), 40)
 
 tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
+
 
 listOfPosition = []
 def drawGamefield(surface):
@@ -131,6 +114,33 @@ def circPosDict(listOfPosition):
             positionDict[letter + number] = listOfPosition[listCount]
             listCount += 1
 
+def mouseAboveCircle():
+
+    mouse_x = pygame.mouse.get_pos()[0]
+    mouse_y = pygame.mouse.get_pos()[1]
+
+    for circPosition in  listOfPosition:
+        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
+            return True
+
+
+def select(token):
+    token.color = (230,170,50)
+
+def move(token):
+
+    mouse_x = pygame.mouse.get_pos()[0]
+    mouse_y = pygame.mouse.get_pos()[1]
+    for circPosition in  listOfPosition:
+        print ('move function, circle', circPosition)
+        print ('move function, mouse', mouse_x, mouse_y)
+        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
+            token.position = [circPosition[0], circPosition[1]]
+            print ('you are in the circle')
+            if token.player == 1:
+                token.color = red
+            if token.player == 2:
+                token.color = blue
 
 def redrawWindow():
 
@@ -151,7 +161,6 @@ def mainLoop ():
 
         if pygame.mouse.get_pressed() == (1,0,0):
 
-
             print (pygame.mouse.get_pos())
             for x in tokens:
                 if numOfClicks == 0:
@@ -160,12 +169,13 @@ def mainLoop ():
                         x.selected = True
                         select(x)
 
-                print (numOfClicks)
-                print (x.selected)
-                if numOfClicks == 1 and x.selected == True:
+                #print (numOfClicks)
+                #print (x.selected)
+                if numOfClicks == 1 and x.selected == True and mouseAboveCircle():
                     move(x)
                     print ('second click')
                     numOfClicks = 0
+                    x.selected = False
 
 
 
