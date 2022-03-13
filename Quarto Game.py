@@ -104,22 +104,22 @@ def drawGamefield(surface):
 
 positionDict = {}
 def circPosDict(listOfPosition):
-    letterPosition = ["A","B","C"]
+    letterPosition = ["A","B","C"] # defining the name position for the dict
     numberPosition = ["1","2","3"]
 
     listCount = 0
     for letter in letterPosition:
         for number in numberPosition:
             positionDict[letter + number] = listOfPosition[listCount] # making dict of positions {'A1': (246, 160), 'A2': (246, 306),.....}
-            listCount += 1
+            listCount += 1 # selecting the items from the listOfPositions
 
-def mouseAboveCircle():
+def mouseAboveCircle(): # checks if mouse is above the game field circle
 
     mouse_x = pygame.mouse.get_pos()[0]
     mouse_y = pygame.mouse.get_pos()[1]
 
     for circPosition in  listOfPosition:
-        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
+        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40: # with equation of circle checks mouse above game field circle
             return True
 
 
@@ -131,11 +131,8 @@ def move(token):
     mouse_x = pygame.mouse.get_pos()[0]
     mouse_y = pygame.mouse.get_pos()[1]
     for circPosition in  listOfPosition:
-        print ('move function, circle', circPosition)
-        print ('move function, mouse', mouse_x, mouse_y)
         if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
             token.position = [circPosition[0], circPosition[1]]
-            print ('you are in the circle')
             if token.player == 1:
                 token.color = red
             if token.player == 2:
