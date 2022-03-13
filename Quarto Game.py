@@ -20,16 +20,16 @@ class Token():
         self.selected = False
 
     
-    def middleToCorner(self, position):
+    def middleToCorner(self, position): # rectangle position correction, from edge to the middle
         x = position[0] - self.size / 2
         y = position[1] - self.size / 2
         return int(x),int(y)
         
-    def draw (self, surface):
+    def draw (self, surface): # drawing tokens
         
         if self.shape == 'circle':
             pygame.draw.circle(surface, self.color, self.position, self.size/2)
-            if self.inside_circle:
+            if self.inside_circle: # token with circle in the middle
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
         if self.shape == 'rect':
@@ -39,7 +39,7 @@ class Token():
             if self.inside_circle:
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
 
-def mouseAboveToken(token):
+def mouseAboveToken(token): # checks whether mouse is above token
 
     isAbove = False
 
@@ -48,17 +48,17 @@ def mouseAboveToken(token):
     half_size = token.size/2
 
 
-    if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x:
-        if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y:
+    if token.position[0]-half_size < mouse_x and token.position[0] + half_size > mouse_x: # x coordinates
+        if token.position[1] - half_size < mouse_y and token.position[1] + half_size > mouse_y: # y coordinates
             isAbove = True
             #position info
             '''
-            print ('x souradnice:',token.position[0],
-                   'x pozice mysi:', mouse_x,
-                   'x + velikost:', token.position[0] + token.size,"\n",
-                   'y souradnice:',token.position[1],
-                   'y pozice mysi:', mouse_y,
-                   'y + velikost:', token.position[1] + token.size)
+            print ('x coor:',token.position[0],
+                   'x mouse pos:', mouse_x,
+                   'x + size:', token.position[0] + token.size,"\n",
+                   'y coor:',token.position[1],
+                   'y mouse pos:', mouse_y,
+                   'y + size:', token.position[1] + token.size)
             '''
 
     return isAbove
@@ -80,10 +80,10 @@ Blue_3 = Token(2,'rect', blue , True, (460,660), 40)
 tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
 
 
-listOfPosition = []
+listOfPosition = [] # positions of the game field circles
 def drawGamefield(surface):
 
-    numCircles = 3
+    numCircles = 3 # amount of circles in the field
     spaceBetween = width/numCircles - 120
 
     pygame.draw.circle(surface, (255,255,255), (width/2,height/2), 380, width = 5)
