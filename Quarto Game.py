@@ -172,8 +172,8 @@ def mainLoop ():
                     numOfClicks = 0
                     x.selected = False # deselection of the token
 
-        for tokenPos in tokens: #TODO game logic and evaluation of the win/lose
-            print (tokenPos.position)
+        for token in tokens: #TODO game logic and evaluation of the win/lose
+            print (token.position)
 
 
         pygame.time.delay(150)
