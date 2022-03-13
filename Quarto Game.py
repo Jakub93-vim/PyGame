@@ -1,13 +1,12 @@
 import pygame, math
 
-width = 800
+width = 800 # game window dimensions
 height = 800
 
 pygame.init()
 win = pygame.display.set_mode((width, height))
 
-run = True
-selected = False
+run = True # game loop
 
 class Token():
 
@@ -15,7 +14,7 @@ class Token():
         self.player = player
         self.shape = shape
         self.color = color
-        self.inside_circle = inside_circle
+        self.inside_circle = inside_circle # token with a circle inside
         self.position = position
         self.size = size
         self.selected = False
@@ -143,7 +142,8 @@ def move(token):
                 token.color = blue
 
 def redrawWindow():
-
+    
+    win.fill((0, 0, 0))
     drawGamefield(win)
     for i in tokens:
         i.draw(win)
@@ -161,7 +161,7 @@ def mainLoop ():
 
         if pygame.mouse.get_pressed() == (1,0,0):
 
-            print (pygame.mouse.get_pos())
+            print ('pozice mys', pygame.mouse.get_pos(), 'pozice token', Red_1.position)
             for x in tokens:
                 if numOfClicks == 0:
                     if mouseAboveToken(x):
