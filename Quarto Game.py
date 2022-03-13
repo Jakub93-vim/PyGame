@@ -130,9 +130,9 @@ def move(token):
 
     mouse_x = pygame.mouse.get_pos()[0]
     mouse_y = pygame.mouse.get_pos()[1]
-    for circPosition in  listOfPosition:
-        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40:
-            token.position = [circPosition[0], circPosition[1]]
+    for circPosition in  listOfPosition: # takes all positions from the list
+        if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40: #checks if there was a click in the circle
+            token.position = [circPosition[0], circPosition[1]] # if there was a click moves the token to the position
             if token.player == 1:
                 token.color = red
             if token.player == 2:
