@@ -171,6 +171,8 @@ def mainLoop ():
                     numOfClicks = 0
                     x.selected = False # deselection of the token
 
+                    print (x.position, positionDict.get('B2'))
+
         for token in tokens: #TODO game logic and evaluation of the win/lose
             if token.position == positionDict.get('B2'):
                 print ('token on the position B2')
