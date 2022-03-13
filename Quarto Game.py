@@ -138,17 +138,17 @@ def move(token):
             if token.player == 2:
                 token.color = blue
 
-def redrawWindow():
+def redrawWindow(): # window update
     
-    win.fill((0, 0, 0))
-    drawGamefield(win)
-    for i in tokens:
+    win.fill((0, 0, 0)) # fills with black color to remove old drawings
+    drawGamefield(win) # draws gamefield
+    for i in tokens: # draws all tokens
         i.draw(win)
     pygame.display.update()
 
 def mainLoop ():
 
-    numOfClicks = 0
+    numOfClicks = 0 # counts num of clicks from the user
     while run:
 
         for event in pygame.event.get():
@@ -156,23 +156,21 @@ def mainLoop ():
                 pygame.quit()
                 exit()
 
-        if pygame.mouse.get_pressed() == (1,0,0):
+        if pygame.mouse.get_pressed() == (1,0,0): # click
 
             print ('pozice mys', pygame.mouse.get_pos(), 'pozice token', Red_1.position)
             for x in tokens:
-                if numOfClicks == 0:
-                    if mouseAboveToken(x):
+                if numOfClicks == 0: # first click selects the token
+                    if mouseAboveToken(x): # checks if the click was above token
                         numOfClicks += 1
-                        x.selected = True
-                        select(x)
+                        x.selected = True # marks selected token
+                        select(x) # changes its color to selected
 
-                #print (numOfClicks)
-                #print (x.selected)
-                if numOfClicks == 1 and x.selected == True and mouseAboveCircle():
+                if numOfClicks == 1 and x.selected == True and mouseAboveCircle(): # second click moves the token if mouse above circle and token selected
                     move(x)
                     print ('second click')
                     numOfClicks = 0
-                    x.selected = False
+                    x.selected = False # deselection of the token
 
 
 
