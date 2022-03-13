@@ -97,10 +97,10 @@ def drawGamefield(surface):
 
             circle_x_pos = int(circle_x_pos)
             circle_y_pos = int(circle_y_pos)
-            if ((circle_x_pos, circle_y_pos)) not in listOfPosition:
+            if ((circle_x_pos, circle_y_pos)) not in listOfPosition: #filling the list with the position
                 listOfPosition.append((circle_x_pos, circle_y_pos))
 
-    circPosDict(listOfPosition)
+    circPosDict(listOfPosition) # calls function with the list to make a dictionary and name the positions
 
 positionDict = {}
 def circPosDict(listOfPosition):
@@ -110,7 +110,7 @@ def circPosDict(listOfPosition):
     listCount = 0
     for letter in letterPosition:
         for number in numberPosition:
-            positionDict[letter + number] = listOfPosition[listCount]
+            positionDict[letter + number] = listOfPosition[listCount] # making dict of positions {'A1': (246, 160), 'A2': (246, 306),.....}
             listCount += 1
 
 def mouseAboveCircle():
@@ -183,6 +183,7 @@ def mainLoop ():
         pygame.time.delay(150)
 
         redrawWindow()
+
 
 mainLoop()
 
