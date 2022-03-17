@@ -26,8 +26,11 @@ class Token():
         return int(x),int(y)
         
     def draw (self, surface): # drawing tokens
-        
+
+
         if self.shape == 'circle':
+            if self.selected == True:
+                self.color = (230,170,50)
             pygame.draw.circle(surface, self.color, self.position, self.size/2)
             if self.inside_circle: # token with circle in the middle
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
@@ -35,6 +38,8 @@ class Token():
         if self.shape == 'rect':
             x_moved = self.middleToCorner(self.position)[0]
             y_moved = self.middleToCorner(self.position)[1]
+            if self.selected == True:
+                self.color = (230,170,50)
             pygame.draw.rect(surface, self.color, (x_moved,y_moved,self.size,self.size))
             if self.inside_circle:
                 pygame.draw.circle(surface, (0,0,0), self.position, 10)
@@ -122,10 +127,6 @@ def mouseAboveCircle(): # checks if mouse is above the game field circle
         if math.sqrt ( (mouse_x - circPosition[0])**2 + (mouse_y - circPosition[1])**2) < 40: # with equation of circle checks mouse above game field circle
             return True
 
-
-def select(token):
-    token.color = (230,170,50)
-
 def move(token):
 
     mouse_x = pygame.mouse.get_pos()[0]
@@ -163,7 +164,7 @@ def mainLoop ():
                     if mouseAboveToken(x): # checks if the click was above token
                         numOfClicks += 1
                         x.selected = True # marks selected token
-                        select(x) # changes its color to selected
+                        #select(x) # changes its color to selected
 
 
                 if numOfClicks == 1 and x.selected == True and mouseAboveCircle(): # second click moves the token if mouse above circle and token selected
