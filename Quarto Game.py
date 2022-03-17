@@ -4,6 +4,7 @@ width = 800 # game window dimensions
 height = 800
 
 pygame.init()
+myfont = pygame.font.SysFont("monospace", 15) # initialize font
 win = pygame.display.set_mode((width, height))
 
 run = True # game loop
@@ -33,7 +34,7 @@ class Token():
                 self.color = (230,170,50)
             pygame.draw.circle(surface, self.color, self.position, self.size/2)
             if self.inside_circle: # token with circle in the middle
-                pygame.draw.circle(surface, (0,0,0), self.position, 10)
+                pygame.draw.circle(surface, (80, 80, 80), self.position, 10)
 
         if self.shape == 'rect':
             x_moved = self.middleToCorner(self.position)[0]
@@ -42,7 +43,7 @@ class Token():
                 self.color = (230,170,50)
             pygame.draw.rect(surface, self.color, (x_moved,y_moved,self.size,self.size))
             if self.inside_circle:
-                pygame.draw.circle(surface, (0,0,0), self.position, 10)
+                pygame.draw.circle(surface, (80, 80, 80), self.position, 10)
 
 def mouseAboveToken(token): # checks whether mouse is above token
 
@@ -77,12 +78,15 @@ blue = (0,40,160)
 Red_1 = Token(1,'circle', red , False, (320,585), 40)
 Red_2 = Token(1,'rect', red , False, (390,585), 40)
 Red_3 = Token(1,'rect', red , True, (460,585), 40)
+Red_4 = Token(1,'rect', red , True, (460,710), 40)
+Red_5 = Token(1,'rect', red , True, (390,710), 40)
 
-Blue_1 = Token(2,'circle', blue , False, (320,660), 40)
-Blue_2 = Token(2,'rect', blue , False, (390,660), 40)
-Blue_3 = Token(2,'rect', blue , True, (460,660), 40)
+Blue_1 = Token(2,'circle', blue , False, (320,650), 40)
+Blue_2 = Token(2,'rect', blue , False, (390,650), 40)
+Blue_3 = Token(2,'rect', blue , True, (460,650), 40)
+Blue_4 = Token(2,'rect', blue , True, (320,710), 40)
 
-tokens.extend([Red_1, Red_2, Red_3, Blue_1, Blue_2, Blue_3])
+tokens.extend([Red_1, Red_2, Red_3, Red_4, Red_5, Blue_1, Blue_2, Blue_3, Blue_4])
 
 
 listOfPosition = [] # positions of the game field circles
@@ -141,10 +145,12 @@ def move(token):
 
 def redrawWindow(): # window update
     
-    win.fill((0, 0, 0)) # fills with black color to remove old drawings
+    win.fill((80, 80, 80)) # fills with black color to remove old drawings
     drawGamefield(win) # draws gamefield
     for i in tokens: # draws all tokens
         i.draw(win)
+    label = myfont.render("Player Red wins!", 1, (255, 255, 0))
+    win.blit(label, (100, 100))
     pygame.display.update()
 
 def mainLoop ():
@@ -176,7 +182,9 @@ def mainLoop ():
 
         for token in tokens: #TODO game logic and evaluation of the win/lose
             if tuple (token.position) == positionDict.get('B2'):
-                print ('token on the position B2')
+                label = myfont.render("Player Red wins!", 1, (255, 255, 0))
+                win.blit(label, (100, 300))
+                print ('token on B2')
 
 
         pygame.time.delay(150)
