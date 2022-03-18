@@ -4,7 +4,7 @@ width = 800 # game window dimensions
 height = 800
 
 pygame.init()
-myfont = pygame.font.SysFont("monospace", 15) # initialize font
+myfont = pygame.font.SysFont("monospace", 25,True) # initialize font
 win = pygame.display.set_mode((width, height))
 
 run = True # game loop
@@ -149,13 +149,18 @@ def redrawWindow(): # window update
     drawGamefield(win) # draws gamefield
     for i in tokens: # draws all tokens
         i.draw(win)
-    label = myfont.render("Player Red wins!", 1, (255, 255, 0))
-    win.blit(label, (100, 100))
+    if PlayerRed:
+
+        label = myfont.render("Player Red wins!", 1, (0, 0, 0))
+        win.blit(label, (20, 20))
     pygame.display.update()
 
 def mainLoop ():
 
     numOfClicks = 0 # counts num of clicks from the user
+
+    global PlayerRed, PlayerBlue
+    PlayerRed, PlayerBlue = False
     while run:
 
         for event in pygame.event.get():
@@ -182,9 +187,7 @@ def mainLoop ():
 
         for token in tokens: #TODO game logic and evaluation of the win/lose
             if tuple (token.position) == positionDict.get('B2'):
-                label = myfont.render("Player Red wins!", 1, (255, 255, 0))
-                win.blit(label, (100, 300))
-                print ('token on B2')
+                PlayerRed = True
 
 
         pygame.time.delay(150)
