@@ -79,12 +79,12 @@ Red_1 = Token(1,'circle', red , False, (320,585), 40)
 Red_2 = Token(1,'rect', red , False, (390,585), 40)
 Red_3 = Token(1,'rect', red , True, (460,585), 40)
 Red_4 = Token(1,'rect', red , True, (460,710), 40)
-Red_5 = Token(1,'circle', red , False, (390,710), 40)
+Red_5 = Token(1,'circle', red , True, (390,710), 40)
 
 Blue_1 = Token(2,'circle', blue , False, (320,650), 40)
 Blue_2 = Token(2,'rect', blue , False, (390,650), 40)
 Blue_3 = Token(2,'rect', blue , True, (460,650), 40)
-Blue_4 = Token(2,'rect', blue , True, (320,710), 40)
+Blue_4 = Token(2,'circle', blue , True, (320,710), 40)
 
 tokens.extend([Red_1, Red_2, Red_3, Red_4, Red_5, Blue_1, Blue_2, Blue_3, Blue_4])
 
@@ -190,11 +190,18 @@ def mainLoop ():
 
             print (gameEvaluation, gameEvaluation[0][0])
 
-
+        posNames = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
+        name = 0
         for token in tokens:
             if token.shape == 'circle':
-                if tuple (token.position) == positionDict.get('A1'):
-                    gameEvaluation[0][0] = 1
+                for i in range (3):
+                    for j in range (3):
+                        print ('gameeva', i, j, 'equals to posNames ', name)
+                        if tuple (token.position) == positionDict.get(posNames[name]):
+                            gameEvaluation[i][j] = 1
+                        name += 1
+
+                '''    
                 elif tuple (token.position) == positionDict.get('A2'):
                     gameEvaluation[0][1] = 1
                 elif tuple (token.position) == positionDict.get('A3'):
@@ -211,7 +218,7 @@ def mainLoop ():
                     gameEvaluation[2][1] = 1
                 elif tuple (token.position) == positionDict.get('C3'):
                     gameEvaluation[2][2] = 1
-
+                '''
         if gameEvaluation[0][0] == 1 and gameEvaluation[0][1]==1 and gameEvaluation[0][2]==1:
             PlayerRed = True
         elif gameEvaluation[1][0] == 1 and gameEvaluation[1][1]==1 and gameEvaluation[1][2]==1:
