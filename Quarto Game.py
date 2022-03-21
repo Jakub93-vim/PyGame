@@ -163,6 +163,7 @@ def mainLoop ():
     global PlayerRed, PlayerBlue
     PlayerRed = False
     gameEvaluation = [[0,0,0],[0,0,0],[0,0,0]]
+    broList = []
     while run:
 
         for event in pygame.event.get():
@@ -189,6 +190,7 @@ def mainLoop ():
 
             print (gameEvaluation, gameEvaluation[0][0])
 
+
         for token in tokens:
             if token.shape == 'circle':
                 if tuple (token.position) == positionDict.get('A1'):
@@ -197,8 +199,24 @@ def mainLoop ():
                     gameEvaluation[0][1] = 1
                 elif tuple (token.position) == positionDict.get('A3'):
                     gameEvaluation[0][2] = 1
+                elif tuple (token.position) == positionDict.get('B1'):
+                    gameEvaluation[1][0] = 1
+                elif tuple (token.position) == positionDict.get('B2'):
+                    gameEvaluation[1][1] = 1
+                elif tuple (token.position) == positionDict.get('B3'):
+                    gameEvaluation[1][2] = 1
+                elif tuple (token.position) == positionDict.get('C1'):
+                    gameEvaluation[2][0] = 1
+                elif tuple (token.position) == positionDict.get('C2'):
+                    gameEvaluation[2][1] = 1
+                elif tuple (token.position) == positionDict.get('C3'):
+                    gameEvaluation[2][2] = 1
 
         if gameEvaluation[0][0] == 1 and gameEvaluation[0][1]==1 and gameEvaluation[0][2]==1:
+            PlayerRed = True
+        elif gameEvaluation[1][0] == 1 and gameEvaluation[1][1]==1 and gameEvaluation[1][2]==1:
+            PlayerRed = True
+        elif gameEvaluation[2][0] == 1 and gameEvaluation[2][1]==1 and gameEvaluation[2][2]==1:
             PlayerRed = True
 
 
