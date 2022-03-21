@@ -79,7 +79,7 @@ Red_1 = Token(1,'circle', red , False, (320,585), 40)
 Red_2 = Token(1,'rect', red , False, (390,585), 40)
 Red_3 = Token(1,'rect', red , True, (460,585), 40)
 Red_4 = Token(1,'rect', red , True, (460,710), 40)
-Red_5 = Token(1,'rect', red , True, (390,710), 40)
+Red_5 = Token(1,'circle', red , False, (390,710), 40)
 
 Blue_1 = Token(2,'circle', blue , False, (320,650), 40)
 Blue_2 = Token(2,'rect', blue , False, (390,650), 40)
@@ -155,13 +155,14 @@ def redrawWindow(): # window update
         win.blit(label, (20, 20))
     pygame.display.update()
 
+
 def mainLoop ():
 
     numOfClicks = 0 # counts num of clicks from the user
-    winPosition = []
 
     global PlayerRed, PlayerBlue
     PlayerRed = False
+    gameEvaluation = [[0,0,0],[0,0,0],[0,0,0]]
     while run:
 
         for event in pygame.event.get():
@@ -186,20 +187,22 @@ def mainLoop ():
 
                     print (x.position, positionDict.get('B2'))
 
-        winPosition = [['A1','A2','A3'], ['B1','B2','B3']]
-        for token in tokens: #TODO game logic and evaluation of the win/lose
-            if token.shape == 'circle':
-                for x in winPosition:
-                    n=0
-                    while n < 2:
-                        n += 1
-                        if tuple (token.position) == positionDict.get(x[n]):
+            print (gameEvaluation, gameEvaluation[0][0])
 
-                            PlayerRed = True
+        for token in tokens:
+            if token.shape == 'circle':
+                if tuple (token.position) == positionDict.get('A1'):
+                    gameEvaluation[0][0] = 1
+                elif tuple (token.position) == positionDict.get('A2'):
+                    gameEvaluation[0][1] = 1
+                elif tuple (token.position) == positionDict.get('A3'):
+                    gameEvaluation[0][2] = 1
+
+        if gameEvaluation[0][0] == 1 and gameEvaluation[0][1]==1 and gameEvaluation[0][2]==1:
+            PlayerRed = True
 
 
         pygame.time.delay(150)
-
         redrawWindow()
 
 
