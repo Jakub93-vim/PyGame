@@ -158,9 +158,10 @@ def redrawWindow(): # window update
 def mainLoop ():
 
     numOfClicks = 0 # counts num of clicks from the user
+    winPosition = []
 
     global PlayerRed, PlayerBlue
-    PlayerRed, PlayerBlue = False
+    PlayerRed = False
     while run:
 
         for event in pygame.event.get():
@@ -185,9 +186,16 @@ def mainLoop ():
 
                     print (x.position, positionDict.get('B2'))
 
+        winPosition = [['A1','A2','A3'], ['B1','B2','B3']]
         for token in tokens: #TODO game logic and evaluation of the win/lose
-            if tuple (token.position) == positionDict.get('B2'):
-                PlayerRed = True
+            if token.shape == 'circle':
+                for x in winPosition:
+                    n=0
+                    while n < 2:
+                        n += 1
+                        if tuple (token.position) == positionDict.get(x[n]):
+
+                            PlayerRed = True
 
 
         pygame.time.delay(150)
