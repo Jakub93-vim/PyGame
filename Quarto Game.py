@@ -191,15 +191,17 @@ def mainLoop ():
             print (gameEvaluation, gameEvaluation[0][0])
 
         posNames = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
-        name = 0
+
         for token in tokens:
+            name = 0
             if token.shape == 'circle':
                 for i in range (3):
                     for j in range (3):
                         print ('gameeva', i, j, 'equals to posNames ', name)
                         if tuple (token.position) == positionDict.get(posNames[name]):
                             gameEvaluation[i][j] = 1
-                        name += 1
+                        if name <8:
+                            name += 1
 
                 '''    
                 elif tuple (token.position) == positionDict.get('A2'):
