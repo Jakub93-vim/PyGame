@@ -153,6 +153,10 @@ def redrawWindow(): # window update
 
         label = myfont.render("Player Red wins!", 1, (0, 0, 0))
         win.blit(label, (20, 20))
+    if PlayerBlue:
+
+        label = myfont.render("Player Blue wins!", 1, (0, 0, 0))
+        win.blit(label, (20, 20))
     pygame.display.update()
 
 
@@ -162,8 +166,9 @@ def mainLoop ():
 
     global PlayerRed, PlayerBlue
     PlayerRed = False
-    gameEvaluation = [[0,0,0],[0,0,0],[0,0,0]]
-    broList = []
+    PlayerBlue = False
+    gameEvalCircHoriz = [[0,0,0],[0,0,0],[0,0,0]]
+    gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     while run:
 
         for event in pygame.event.get():
@@ -188,9 +193,9 @@ def mainLoop ():
 
                     print (x.position, positionDict.get('B2'))
 
-            print (gameEvaluation, gameEvaluation[0][0])
 
-        posNames = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
+        posNamesHoriz = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
+        posNamesVerti = ['A1', 'B1', 'C1', 'A2', 'B2', 'C2', 'A3', 'B3', 'C3']
 
         for token in tokens:
             name = 0
@@ -198,34 +203,17 @@ def mainLoop ():
                 for i in range (3):
                     for j in range (3):
                         print ('gameeva', i, j, 'equals to posNames ', name)
-                        if tuple (token.position) == positionDict.get(posNames[name]):
-                            gameEvaluation[i][j] = 1
+                        if tuple (token.position) == positionDict.get(posNamesHoriz[name]):
+                            gameEvalCircHoriz[i][j] = 1
                         if name <8:
                             name += 1
 
-                '''    
-                elif tuple (token.position) == positionDict.get('A2'):
-                    gameEvaluation[0][1] = 1
-                elif tuple (token.position) == positionDict.get('A3'):
-                    gameEvaluation[0][2] = 1
-                elif tuple (token.position) == positionDict.get('B1'):
-                    gameEvaluation[1][0] = 1
-                elif tuple (token.position) == positionDict.get('B2'):
-                    gameEvaluation[1][1] = 1
-                elif tuple (token.position) == positionDict.get('B3'):
-                    gameEvaluation[1][2] = 1
-                elif tuple (token.position) == positionDict.get('C1'):
-                    gameEvaluation[2][0] = 1
-                elif tuple (token.position) == positionDict.get('C2'):
-                    gameEvaluation[2][1] = 1
-                elif tuple (token.position) == positionDict.get('C3'):
-                    gameEvaluation[2][2] = 1
-                '''
-        if gameEvaluation[0][0] == 1 and gameEvaluation[0][1]==1 and gameEvaluation[0][2]==1:
+
+        if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
             PlayerRed = True
-        elif gameEvaluation[1][0] == 1 and gameEvaluation[1][1]==1 and gameEvaluation[1][2]==1:
+        elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
             PlayerRed = True
-        elif gameEvaluation[2][0] == 1 and gameEvaluation[2][1]==1 and gameEvaluation[2][2]==1:
+        elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
             PlayerRed = True
 
 
