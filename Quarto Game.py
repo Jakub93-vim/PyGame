@@ -208,12 +208,29 @@ def mainLoop ():
                         if name <8:
                             name += 1
 
+            name = 0
+            if token.shape == 'circle':
+                for i in range(3):
+                    for j in range(3):
+                        print('gameeva', i, j, 'equals to posNames ', name)
+                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                            gameEvalCircVerti[i][j] = 1
+                        if name < 8:
+                            name += 1
+
 
         if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
             PlayerRed = True
         elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
             PlayerRed = True
         elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
+            PlayerRed = True
+
+        if [0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
+            PlayerRed = True
+        elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
+            PlayerRed = True
+        elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
             PlayerRed = True
 
 
