@@ -222,7 +222,7 @@ def mainLoop ():
             if token.shape == 'rect':
                 for i in range(3):
                     for j in range(3):
-                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                        if tuple(token.position) == positionDict.get(posNamesHoriz[name]):
                             gameEvalRectHoriz[i][j] = 1
                         if name < 8:
                             name += 1
