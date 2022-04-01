@@ -169,6 +169,7 @@ def mainLoop ():
     PlayerBlue = False
     gameEvalCircHoriz = [[0,0,0],[0,0,0],[0,0,0]]
     gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalRectHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     while run:
 
         for event in pygame.event.get():
@@ -202,7 +203,6 @@ def mainLoop ():
             if token.shape == 'circle':
                 for i in range (3):
                     for j in range (3):
-                        print ('gameeva', i, j, 'equals to posNames ', name)
                         if tuple (token.position) == positionDict.get(posNamesHoriz[name]):
                             gameEvalCircHoriz[i][j] = 1
                         if name <8:
@@ -212,9 +212,17 @@ def mainLoop ():
             if token.shape == 'circle':
                 for i in range(3):
                     for j in range(3):
-                        print('gameeva', i, j, 'equals to posNames ', name)
                         if tuple(token.position) == positionDict.get(posNamesVerti[name]):
                             gameEvalCircVerti[i][j] = 1
+                        if name < 8:
+                            name += 1
+
+            name = 0
+            if token.shape == 'rect':
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                            gameEvalRectHoriz[i][j] = 1
                         if name < 8:
                             name += 1
 
@@ -226,11 +234,18 @@ def mainLoop ():
         elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
             PlayerRed = True
 
-        if [0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
+        if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
             PlayerRed = True
         elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
             PlayerRed = True
         elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalRectHoriz[0][0] == 1 and gameEvalRectHoriz[0][1]==1 and gameEvalRectHoriz[0][2]==1:
+            PlayerRed = True
+        elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
+            PlayerRed = True
+        elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
             PlayerRed = True
 
 
