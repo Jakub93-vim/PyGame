@@ -159,14 +159,21 @@ def redrawWindow(): # window update
         win.blit(label, (20, 20))
     pygame.display.update()
 
+    if BlueTurn:
+
+        label = myfont.render("Blue turn!", 1, (blue))
+        win.blit(label, (580, 520))
+    pygame.display.update()
+
 
 def mainLoop ():
 
     numOfClicks = 0 # counts num of clicks from the user
 
-    global PlayerRed, PlayerBlue
+    global PlayerRed, PlayerBlue, BlueTurn, RedTurn
     PlayerRed = False
     PlayerBlue = False
+    BlueTurn = True
     gameEvalCircHoriz = [[0,0,0],[0,0,0],[0,0,0]]
     gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRectHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -192,6 +199,7 @@ def mainLoop ():
                     move(x)
                     numOfClicks = 0
                     x.selected = False # deselection of the token
+                    BlueTurn = False
 
                     print (x.position, positionDict.get('B2'))
 
