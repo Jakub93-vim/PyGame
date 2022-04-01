@@ -170,6 +170,7 @@ def mainLoop ():
     gameEvalCircHoriz = [[0,0,0],[0,0,0],[0,0,0]]
     gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRectHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalRectVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     while run:
 
         for event in pygame.event.get():
@@ -226,6 +227,15 @@ def mainLoop ():
                         if name < 8:
                             name += 1
 
+            name = 0
+            if token.shape == 'rect':
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                            gameEvalRectVerti[i][j] = 1
+                        if name < 8:
+                            name += 1
+
 
         if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
             PlayerRed = True
@@ -246,6 +256,13 @@ def mainLoop ():
         elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
             PlayerRed = True
         elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalRectVerti[0][0] == 1 and gameEvalRectVerti[0][1]==1 and gameEvalRectVerti[0][2]==1:
+            PlayerRed = True
+        elif gameEvalRectVerti[1][0] == 1 and gameEvalRectVerti[1][1]==1 and gameEvalRectVerti[1][2]==1:
+            PlayerRed = True
+        elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
             PlayerRed = True
 
 
