@@ -165,6 +165,12 @@ def redrawWindow(): # window update
         win.blit(label, (580, 520))
     pygame.display.update()
 
+    if RedTurn:
+
+        label = myfont.render("Red turn!", 1, (blue))
+        win.blit(label, (580, 520))
+    pygame.display.update()
+
 
 def mainLoop ():
 
@@ -174,6 +180,7 @@ def mainLoop ():
     PlayerRed = False
     PlayerBlue = False
     BlueTurn = True
+    RedTurn = False
     gameEvalCircHoriz = [[0,0,0],[0,0,0],[0,0,0]]
     gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRectHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -200,6 +207,7 @@ def mainLoop ():
                     numOfClicks = 0
                     x.selected = False # deselection of the token
                     BlueTurn = False
+                    RedTurn = True
 
                     print (x.position, positionDict.get('B2'))
 
