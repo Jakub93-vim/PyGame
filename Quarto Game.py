@@ -189,6 +189,8 @@ def mainLoop ():
     gameEvalBlueVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRedHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRedVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalInsCircHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalInsCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     while run:
 
         for event in pygame.event.get():
@@ -283,7 +285,7 @@ def mainLoop ():
                             name += 1
 
             name = 0
-            if token.color == blue:
+            if token.color == red:
                 for i in range(3):
                     for j in range(3):
                         if tuple(token.position) == positionDict.get(posNamesHoriz[name]):
@@ -292,11 +294,29 @@ def mainLoop ():
                             name += 1
 
             name = 0
-            if token.color == blue:
+            if token.color == red:
                 for i in range(3):
                     for j in range(3):
                         if tuple(token.position) == positionDict.get(posNamesVerti[name]):
                             gameEvalRedVerti[i][j] = 1
+                        if name < 8:
+                            name += 1
+
+            name = 0
+            if token.inside_circle == True:
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesHoriz[name]):
+                            gameEvalInsCircHoriz[i][j] = 1
+                        if name < 8:
+                            name += 1
+
+            name = 0
+            if token.inside_circle == True:
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                            gameEvalInsCircVerti[i][j] = 1
                         if name < 8:
                             name += 1
 
@@ -356,6 +376,21 @@ def mainLoop ():
             PlayerRed = True
         elif gameEvalRedVerti[2][0] == 1 and gameEvalRedVerti[2][1]==1 and gameEvalRedVerti[2][2]==1:
             PlayerRed = True
+
+        if gameEvalInsCircHoriz[0][0] == 1 and gameEvalInsCircHoriz[0][1] == 1 and gameEvalInsCircHoriz[0][2] == 1:
+            PlayerRed = True
+        elif gameEvalInsCircHoriz[1][0] == 1 and gameEvalInsCircHoriz[1][1] == 1 and gameEvalInsCircHoriz[1][2] == 1:
+            PlayerRed = True
+        elif gameEvalInsCircHoriz[2][0] == 1 and gameEvalInsCircHoriz[2][1] == 1 and gameEvalInsCircHoriz[2][2] == 1:
+            PlayerRed = True
+
+        if gameEvalInsCircVerti[0][0] == 1 and gameEvalInsCircVerti[0][1] == 1 and gameEvalInsCircVerti[0][2] == 1:
+            PlayerRed = True
+        elif gameEvalInsCircVerti[1][0] == 1 and gameEvalInsCircVerti[1][1] == 1 and gameEvalInsCircVerti[1][2] == 1:
+            PlayerRed = True
+        elif gameEvalInsCircVerti[2][0] == 1 and gameEvalInsCircVerti[2][1] == 1 and gameEvalInsCircVerti[2][2] == 1:
+            PlayerRed = True
+
         '''
         #if RedTurn:
             if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
