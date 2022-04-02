@@ -206,13 +206,19 @@ def mainLoop ():
                     move(x)
                     numOfClicks = 0
                     x.selected = False # deselection of the token
-                    BlueTurn = False
-                    RedTurn = True
+
+                    if BlueTurn == False:
+                        BlueTurn = True
+                    else:
+                        BlueTurn = False
+
+                    if RedTurn == False:
+                        RedTurn = True
+                    else:
+                        RedTurn = False
+
 
                     print (x.position, positionDict.get('B2'))
-
-        #BlueTurn = True
-        #RedTurn = False
 
 
         posNamesHoriz = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
