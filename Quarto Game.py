@@ -185,6 +185,8 @@ def mainLoop ():
     gameEvalCircVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRectHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     gameEvalRectVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalBlueHoriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    gameEvalBlueVerti = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     while run:
 
         for event in pygame.event.get():
@@ -216,7 +218,6 @@ def mainLoop ():
                         RedTurn = True
                     else:
                         RedTurn = False
-
 
                     print (x.position, positionDict.get('B2'))
 
@@ -261,44 +262,60 @@ def mainLoop ():
                         if name < 8:
                             name += 1
 
-        if BlueTurn:
+            name = 0
+            if token.color == blue:
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesHoriz[name]):
+                            gameEvalBlueHoriz[i][j] = 1
+                        if name < 8:
+                            name += 1
+
+        #if BlueTurn:
+        if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
+            PlayerRed = True
+        elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
+            PlayerRed = True
+        elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
+            PlayerRed = True
+        elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
+            PlayerRed = True
+        elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalRectHoriz[0][0] == 1 and gameEvalRectHoriz[0][1]==1 and gameEvalRectHoriz[0][2]==1:
+            PlayerRed = True
+        elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
+            PlayerRed = True
+        elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalRectVerti[0][0] == 1 and gameEvalRectVerti[0][1]==1 and gameEvalRectVerti[0][2]==1:
+            PlayerRed = True
+        elif gameEvalRectVerti[1][0] == 1 and gameEvalRectVerti[1][1]==1 and gameEvalRectVerti[1][2]==1:
+            PlayerRed = True
+        elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalBlueHoriz[0][0] == 1 and gameEvalBlueHoriz[0][1]==1 and gameEvalBlueHoriz[0][2]==1:
+            PlayerRed = True
+        elif gameEvalBlueHoriz[1][0] == 1 and gameEvalBlueHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
+            PlayerRed = True
+        elif gameEvalBlueHoriz[2][0] == 1 and gameEvalBlueHoriz[2][1]==1 and gameEvalBlueHoriz[2][2]==1:
+            PlayerRed = True
+        '''
+        #if RedTurn:
             if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
-                PlayerRed = True
+                PlayerBlue = True
             elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
-                PlayerRed = True
+                PlayerBlue = True
             elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
-                PlayerRed = True
+                PlayerBlue = True
 
             if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
-                PlayerRed = True
-            elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
-                PlayerRed = True
-            elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
-                PlayerRed = True
-
-            if gameEvalRectHoriz[0][0] == 1 and gameEvalRectHoriz[0][1]==1 and gameEvalRectHoriz[0][2]==1:
-                PlayerRed = True
-            elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
-                PlayerRed = True
-            elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
-                PlayerRed = True
-
-            if gameEvalRectVerti[0][0] == 1 and gameEvalRectVerti[0][1]==1 and gameEvalRectVerti[0][2]==1:
-                PlayerRed = True
-            elif gameEvalRectVerti[1][0] == 1 and gameEvalRectVerti[1][1]==1 and gameEvalRectVerti[1][2]==1:
-                PlayerRed = True
-            elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
-                PlayerRed = True
-
-        if RedTurn:
-            if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
-                PlayerBlue = True
-            elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
-                PlayerBlue = True
-            elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
-                PlayerBlue = True
-
-            if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
                 PlayerBlue = True
             elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
                 PlayerBlue = True
@@ -318,7 +335,7 @@ def mainLoop ():
                 PlayerBlue = True
             elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
                 PlayerBlue = True
-
+        '''
 
         pygame.time.delay(150)
         redrawWindow()
