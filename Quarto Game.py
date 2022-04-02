@@ -167,8 +167,8 @@ def redrawWindow(): # window update
 
     if RedTurn:
 
-        label = myfont.render("Red turn!", 1, (blue))
-        win.blit(label, (580, 520))
+        label = myfont.render("Red turn!", 1, (red))
+        win.blit(label, (120, 520))
     pygame.display.update()
 
 
@@ -210,6 +210,9 @@ def mainLoop ():
                     RedTurn = True
 
                     print (x.position, positionDict.get('B2'))
+
+        #BlueTurn = True
+        #RedTurn = False
 
 
         posNamesHoriz = ['A1','A2','A3','B1','B2','B3','C1','C2','C3']
