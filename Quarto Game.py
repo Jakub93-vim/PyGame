@@ -271,6 +271,15 @@ def mainLoop ():
                         if name < 8:
                             name += 1
 
+            name = 0
+            if token.color == blue:
+                for i in range(3):
+                    for j in range(3):
+                        if tuple(token.position) == positionDict.get(posNamesVerti[name]):
+                            gameEvalBlueVerti[i][j] = 1
+                        if name < 8:
+                            name += 1
+
         #if BlueTurn:
         if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
             PlayerRed = True
@@ -302,9 +311,16 @@ def mainLoop ():
 
         if gameEvalBlueHoriz[0][0] == 1 and gameEvalBlueHoriz[0][1]==1 and gameEvalBlueHoriz[0][2]==1:
             PlayerRed = True
-        elif gameEvalBlueHoriz[1][0] == 1 and gameEvalBlueHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
+        elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
             PlayerRed = True
         elif gameEvalBlueHoriz[2][0] == 1 and gameEvalBlueHoriz[2][1]==1 and gameEvalBlueHoriz[2][2]==1:
+            PlayerRed = True
+
+        if gameEvalBlueVerti[0][0] == 1 and gameEvalBlueVerti[0][1]==1 and gameEvalBlueVerti[0][2]==1:
+            PlayerRed = True
+        elif gameEvalBlueVerti[1][0] == 1 and gameEvalBlueVerti[1][1]==1 and gameEvalBlueVerti[1][2]==1:
+            PlayerRed = True
+        elif gameEvalBlueVerti[2][0] == 1 and gameEvalBlueVerti[2][1]==1 and gameEvalBlueVerti[2][2]==1:
             PlayerRed = True
         '''
         #if RedTurn:
