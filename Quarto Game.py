@@ -201,11 +201,11 @@ def mainLoop ():
         if pygame.mouse.get_pressed() == (1,0,0): # click
 
             for x in tokens:
+
                 if numOfClicks == 0: # first click selects the token
                     if mouseAboveToken(x): # checks if the click was above token
                         numOfClicks += 1
                         x.selected = True # marks selected token
-                        #select(x) # changes its color to selected
 
 
                 if numOfClicks == 1 and x.selected == True and mouseAboveCircle(): # second click moves the token if mouse above circle and token selected
@@ -320,79 +320,7 @@ def mainLoop ():
                         if name < 8:
                             name += 1
 
-        #if BlueTurn:
-        if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
-            PlayerRed = True
-        elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
-            PlayerRed = True
-        elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
-            PlayerRed = True
-        elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
-            PlayerRed = True
-        elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalRectHoriz[0][0] == 1 and gameEvalRectHoriz[0][1]==1 and gameEvalRectHoriz[0][2]==1:
-            PlayerRed = True
-        elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
-            PlayerRed = True
-        elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalRectVerti[0][0] == 1 and gameEvalRectVerti[0][1]==1 and gameEvalRectVerti[0][2]==1:
-            PlayerRed = True
-        elif gameEvalRectVerti[1][0] == 1 and gameEvalRectVerti[1][1]==1 and gameEvalRectVerti[1][2]==1:
-            PlayerRed = True
-        elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalBlueHoriz[0][0] == 1 and gameEvalBlueHoriz[0][1]==1 and gameEvalBlueHoriz[0][2]==1:
-            PlayerRed = True
-        elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
-            PlayerRed = True
-        elif gameEvalBlueHoriz[2][0] == 1 and gameEvalBlueHoriz[2][1]==1 and gameEvalBlueHoriz[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalBlueVerti[0][0] == 1 and gameEvalBlueVerti[0][1]==1 and gameEvalBlueVerti[0][2]==1:
-            PlayerRed = True
-        elif gameEvalBlueVerti[1][0] == 1 and gameEvalBlueVerti[1][1]==1 and gameEvalBlueVerti[1][2]==1:
-            PlayerRed = True
-        elif gameEvalBlueVerti[2][0] == 1 and gameEvalBlueVerti[2][1]==1 and gameEvalBlueVerti[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalRedHoriz[0][0] == 1 and gameEvalRedHoriz[0][1]==1 and gameEvalRedHoriz[0][2]==1:
-            PlayerRed = True
-        elif gameEvalRedHoriz[1][0] == 1 and gameEvalRedHoriz[1][1]==1 and gameEvalRedHoriz[1][2]==1:
-            PlayerRed = True
-        elif gameEvalRedHoriz[2][0] == 1 and gameEvalRedHoriz[2][1]==1 and gameEvalRedHoriz[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalRedVerti[0][0] == 1 and gameEvalRedVerti[0][1]==1 and gameEvalRedVerti[0][2]==1:
-            PlayerRed = True
-        elif gameEvalRedVerti[1][0] == 1 and gameEvalRedVerti[1][1]==1 and gameEvalRedVerti[1][2]==1:
-            PlayerRed = True
-        elif gameEvalRedVerti[2][0] == 1 and gameEvalRedVerti[2][1]==1 and gameEvalRedVerti[2][2]==1:
-            PlayerRed = True
-
-        if gameEvalInsCircHoriz[0][0] == 1 and gameEvalInsCircHoriz[0][1] == 1 and gameEvalInsCircHoriz[0][2] == 1:
-            PlayerRed = True
-        elif gameEvalInsCircHoriz[1][0] == 1 and gameEvalInsCircHoriz[1][1] == 1 and gameEvalInsCircHoriz[1][2] == 1:
-            PlayerRed = True
-        elif gameEvalInsCircHoriz[2][0] == 1 and gameEvalInsCircHoriz[2][1] == 1 and gameEvalInsCircHoriz[2][2] == 1:
-            PlayerRed = True
-
-        if gameEvalInsCircVerti[0][0] == 1 and gameEvalInsCircVerti[0][1] == 1 and gameEvalInsCircVerti[0][2] == 1:
-            PlayerRed = True
-        elif gameEvalInsCircVerti[1][0] == 1 and gameEvalInsCircVerti[1][1] == 1 and gameEvalInsCircVerti[1][2] == 1:
-            PlayerRed = True
-        elif gameEvalInsCircVerti[2][0] == 1 and gameEvalInsCircVerti[2][1] == 1 and gameEvalInsCircVerti[2][2] == 1:
-            PlayerRed = True
-
-        '''
-        #if RedTurn:
+        if BlueTurn:
             if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
                 PlayerBlue = True
             elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
@@ -420,7 +348,121 @@ def mainLoop ():
                 PlayerBlue = True
             elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
                 PlayerBlue = True
-        '''
+
+            if gameEvalBlueHoriz[0][0] == 1 and gameEvalBlueHoriz[0][1]==1 and gameEvalBlueHoriz[0][2]==1:
+                PlayerBlue = True
+            elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
+                PlayerBlue = True
+            elif gameEvalBlueHoriz[2][0] == 1 and gameEvalBlueHoriz[2][1]==1 and gameEvalBlueHoriz[2][2]==1:
+                PlayerBlue = True
+
+            if gameEvalBlueVerti[0][0] == 1 and gameEvalBlueVerti[0][1]==1 and gameEvalBlueVerti[0][2]==1:
+                PlayerBlue = True
+            elif gameEvalBlueVerti[1][0] == 1 and gameEvalBlueVerti[1][1]==1 and gameEvalBlueVerti[1][2]==1:
+                PlayerBlue = True
+            elif gameEvalBlueVerti[2][0] == 1 and gameEvalBlueVerti[2][1]==1 and gameEvalBlueVerti[2][2]==1:
+                PlayerBlue = True
+
+            if gameEvalRedHoriz[0][0] == 1 and gameEvalRedHoriz[0][1]==1 and gameEvalRedHoriz[0][2]==1:
+                PlayerBlue = True
+            elif gameEvalRedHoriz[1][0] == 1 and gameEvalRedHoriz[1][1]==1 and gameEvalRedHoriz[1][2]==1:
+                PlayerBlue = True
+            elif gameEvalRedHoriz[2][0] == 1 and gameEvalRedHoriz[2][1]==1 and gameEvalRedHoriz[2][2]==1:
+                PlayerBlue = True
+
+            if gameEvalRedVerti[0][0] == 1 and gameEvalRedVerti[0][1]==1 and gameEvalRedVerti[0][2]==1:
+                PlayerBlue = True
+            elif gameEvalRedVerti[1][0] == 1 and gameEvalRedVerti[1][1]==1 and gameEvalRedVerti[1][2]==1:
+                PlayerBlue = True
+            elif gameEvalRedVerti[2][0] == 1 and gameEvalRedVerti[2][1]==1 and gameEvalRedVerti[2][2]==1:
+                PlayerBlue = True
+
+            if gameEvalInsCircHoriz[0][0] == 1 and gameEvalInsCircHoriz[0][1] == 1 and gameEvalInsCircHoriz[0][2] == 1:
+                PlayerBlue = True
+            elif gameEvalInsCircHoriz[1][0] == 1 and gameEvalInsCircHoriz[1][1] == 1 and gameEvalInsCircHoriz[1][2] == 1:
+                PlayerBlue = True
+            elif gameEvalInsCircHoriz[2][0] == 1 and gameEvalInsCircHoriz[2][1] == 1 and gameEvalInsCircHoriz[2][2] == 1:
+                PlayerBlue = True
+
+            if gameEvalInsCircVerti[0][0] == 1 and gameEvalInsCircVerti[0][1] == 1 and gameEvalInsCircVerti[0][2] == 1:
+                PlayerBlue = True
+            elif gameEvalInsCircVerti[1][0] == 1 and gameEvalInsCircVerti[1][1] == 1 and gameEvalInsCircVerti[1][2] == 1:
+                PlayerBlue = True
+            elif gameEvalInsCircVerti[2][0] == 1 and gameEvalInsCircVerti[2][1] == 1 and gameEvalInsCircVerti[2][2] == 1:
+                PlayerBlue = True
+
+
+        if RedTurn:
+            if gameEvalCircHoriz[0][0] == 1 and gameEvalCircHoriz[0][1]==1 and gameEvalCircHoriz[0][2]==1:
+                PlayerRed = True
+            elif gameEvalCircHoriz[1][0] == 1 and gameEvalCircHoriz[1][1]==1 and gameEvalCircHoriz[1][2]==1:
+                PlayerRed = True
+            elif gameEvalCircHoriz[2][0] == 1 and gameEvalCircHoriz[2][1]==1 and gameEvalCircHoriz[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalCircVerti[0][0] == 1 and gameEvalCircVerti[0][1]==1 and gameEvalCircVerti[0][2]==1:
+                PlayerRed = True
+            elif gameEvalCircVerti[1][0] == 1 and gameEvalCircVerti[1][1]==1 and gameEvalCircVerti[1][2]==1:
+                PlayerRed = True
+            elif gameEvalCircVerti[2][0] == 1 and gameEvalCircVerti[2][1]==1 and gameEvalCircVerti[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalRectHoriz[0][0] == 1 and gameEvalRectHoriz[0][1]==1 and gameEvalRectHoriz[0][2]==1:
+                PlayerRed = True
+            elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalRectHoriz[1][2]==1:
+                PlayerRed = True
+            elif gameEvalRectHoriz[2][0] == 1 and gameEvalRectHoriz[2][1]==1 and gameEvalRectHoriz[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalRectVerti[0][0] == 1 and gameEvalRectVerti[0][1]==1 and gameEvalRectVerti[0][2]==1:
+                PlayerRed = True
+            elif gameEvalRectVerti[1][0] == 1 and gameEvalRectVerti[1][1]==1 and gameEvalRectVerti[1][2]==1:
+                PlayerRed = True
+            elif gameEvalRectVerti[2][0] == 1 and gameEvalRectVerti[2][1]==1 and gameEvalRectVerti[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalBlueHoriz[0][0] == 1 and gameEvalBlueHoriz[0][1]==1 and gameEvalBlueHoriz[0][2]==1:
+                PlayerRed = True
+            elif gameEvalRectHoriz[1][0] == 1 and gameEvalRectHoriz[1][1]==1 and gameEvalBlueHoriz[1][2]==1:
+                PlayerRed = True
+            elif gameEvalBlueHoriz[2][0] == 1 and gameEvalBlueHoriz[2][1]==1 and gameEvalBlueHoriz[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalBlueVerti[0][0] == 1 and gameEvalBlueVerti[0][1]==1 and gameEvalBlueVerti[0][2]==1:
+                PlayerRed = True
+            elif gameEvalBlueVerti[1][0] == 1 and gameEvalBlueVerti[1][1]==1 and gameEvalBlueVerti[1][2]==1:
+                PlayerRed = True
+            elif gameEvalBlueVerti[2][0] == 1 and gameEvalBlueVerti[2][1]==1 and gameEvalBlueVerti[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalRedHoriz[0][0] == 1 and gameEvalRedHoriz[0][1]==1 and gameEvalRedHoriz[0][2]==1:
+                PlayerRed = True
+            elif gameEvalRedHoriz[1][0] == 1 and gameEvalRedHoriz[1][1]==1 and gameEvalRedHoriz[1][2]==1:
+                PlayerRed = True
+            elif gameEvalRedHoriz[2][0] == 1 and gameEvalRedHoriz[2][1]==1 and gameEvalRedHoriz[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalRedVerti[0][0] == 1 and gameEvalRedVerti[0][1]==1 and gameEvalRedVerti[0][2]==1:
+                PlayerRed = True
+            elif gameEvalRedVerti[1][0] == 1 and gameEvalRedVerti[1][1]==1 and gameEvalRedVerti[1][2]==1:
+                PlayerRed = True
+            elif gameEvalRedVerti[2][0] == 1 and gameEvalRedVerti[2][1]==1 and gameEvalRedVerti[2][2]==1:
+                PlayerRed = True
+
+            if gameEvalInsCircHoriz[0][0] == 1 and gameEvalInsCircHoriz[0][1] == 1 and gameEvalInsCircHoriz[0][2] == 1:
+                PlayerRed = True
+            elif gameEvalInsCircHoriz[1][0] == 1 and gameEvalInsCircHoriz[1][1] == 1 and gameEvalInsCircHoriz[1][2] == 1:
+                PlayerRed = True
+            elif gameEvalInsCircHoriz[2][0] == 1 and gameEvalInsCircHoriz[2][1] == 1 and gameEvalInsCircHoriz[2][2] == 1:
+                PlayerRed = True
+
+            if gameEvalInsCircVerti[0][0] == 1 and gameEvalInsCircVerti[0][1] == 1 and gameEvalInsCircVerti[0][2] == 1:
+                PlayerRed = True
+            elif gameEvalInsCircVerti[1][0] == 1 and gameEvalInsCircVerti[1][1] == 1 and gameEvalInsCircVerti[1][2] == 1:
+                PlayerRed = True
+            elif gameEvalInsCircVerti[2][0] == 1 and gameEvalInsCircVerti[2][1] == 1 and gameEvalInsCircVerti[2][2] == 1:
+                PlayerRed = True
+
 
         pygame.time.delay(150)
         redrawWindow()
