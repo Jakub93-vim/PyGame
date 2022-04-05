@@ -34,7 +34,7 @@ class Token():
                 self.color = (230,170,50)
             pygame.draw.circle(surface, self.color, self.position, self.size/2)
             if self.inside_circle: # token with circle in the middle
-                pygame.draw.circle(surface, (80, 80, 80), self.position, 10)
+                pygame.draw.circle(surface, (20, 20, 20), self.position, 10)
 
         if self.shape == 'rect':
             x_moved = self.middleToCorner(self.position)[0]
@@ -43,7 +43,7 @@ class Token():
                 self.color = (230,170,50)
             pygame.draw.rect(surface, self.color, (x_moved,y_moved,self.size,self.size))
             if self.inside_circle:
-                pygame.draw.circle(surface, (80, 80, 80), self.position, 10)
+                pygame.draw.circle(surface, (20, 20, 20), self.position, 10)
 
 def mouseAboveToken(token): # checks whether mouse is above token
 
@@ -145,17 +145,17 @@ def move(token):
 
 def redrawWindow(): # window update
     
-    win.fill((80, 80, 80)) # fills with black color to remove old drawings
+    win.fill((20, 20, 20)) # fills with black color to remove old drawings
     drawGamefield(win) # draws gamefield
     for i in tokens: # draws all tokens
         i.draw(win)
     if PlayerRed:
 
-        label = myfont.render("Player Red wins!", 1, (0, 0, 0))
+        label = myfont.render("Player Red wins!", 1, (red))
         win.blit(label, (20, 20))
     if PlayerBlue:
 
-        label = myfont.render("Player Blue wins!", 1, (0, 0, 0))
+        label = myfont.render("Player Blue wins!", 1, (blue))
         win.blit(label, (540, 20))
     pygame.display.update()
 
