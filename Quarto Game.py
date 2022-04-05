@@ -150,13 +150,13 @@ def redrawWindow(): # window update
     for i in tokens: # draws all tokens
         i.draw(win)
     if PlayerRed:
-
+        BlueTurn, RedTurn = False
         label = myfont.render("Player Red wins!", 1, (0, 0, 0))
         win.blit(label, (20, 20))
     if PlayerBlue:
-
+        BlueTurn, RedTurn = False
         label = myfont.render("Player Blue wins!", 1, (0, 0, 0))
-        win.blit(label, (20, 20))
+        win.blit(label, (540, 20))
     pygame.display.update()
 
     if BlueTurn:
