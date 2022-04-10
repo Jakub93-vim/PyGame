@@ -28,7 +28,7 @@ class Token():
         
     def draw (self, surface): # drawing tokens
 
-
+        #drawing when circle
         if self.shape == 'circle':
             if self.selected == True:
                 self.color = (230,170,50)
@@ -36,6 +36,7 @@ class Token():
             if self.inside_circle: # token with circle in the middle
                 pygame.draw.circle(surface, (20, 20, 20), self.position, 10)
 
+        #drawing when rectan
         if self.shape == 'rect':
             x_moved = self.middleToCorner(self.position)[0]
             y_moved = self.middleToCorner(self.position)[1]
